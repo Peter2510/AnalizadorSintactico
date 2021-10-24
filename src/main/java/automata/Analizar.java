@@ -16,7 +16,8 @@ public class Analizar {
     private int numeroLinea;
     private int cantidadLineas = 0;
     private int posicion = 0;
-    private int estados[][] = new int[16][14];
+    //                             CHARS ESTADOS
+    private int estados[][] = new int[26][21];
     private String linea;
     private int estadoActual =0;
     private String pathMovimientos;
@@ -66,22 +67,25 @@ public class Analizar {
         
         
         //matriz[estado][caracter]=estado;
-        estados[0][0]=1;     estados[0][1]=3;       estados[0][2]=6;       estados[0][3]=8;     estados[0][4]=7;     estados[0][5]=4;       estados[0][6]=11;       estados[0][7]=13;       estados[0][8]=1;        estados[0][9]=2;        estados[0][11]=14;                              estados[0][13]=9;
-        estados[1][0]=1;     estados[1][1]=1;       estados[1][2]=10;      estados[1][3]=10;    estados[1][4]=10;    estados[1][5]=1;       estados[1][6]=10;       estados[1][7]=10;       estados[1][8]=1;        estados[1][9]=1;        estados[1][11]=10;                              estados[1][13]=10;
-        estados[2][0]=10;    estados[2][1]=10;      estados[2][2]=10;      estados[2][3]=10;    estados[2][4]=10;    estados[2][5]=10;      estados[2][6]=10;       estados[2][7]=10;       estados[2][8]=10;       estados[2][9]=10;       estados[2][11]=10;                              estados[2][13]=10;
-        estados[3][0]=10;    estados[3][1]=3;       estados[3][2]=10;      estados[3][3]=10;    estados[3][4]=10;    estados[3][5]=3;       estados[3][6]=10;       estados[3][7]=10;       estados[3][8]=10;       estados[3][9]=10;       estados[3][11]=10;                              estados[3][13]=10;
-        estados[4][0]=10;    estados[4][1]=5;       estados[4][2]=10;      estados[4][3]=10;    estados[4][4]=10;    estados[4][5]=5;       estados[4][6]=10;       estados[4][7]=10;       estados[4][8]=10;       estados[4][9]=10;       estados[4][11]=10;                              estados[4][13]=10;
-        estados[5][0]=10;    estados[5][1]=10;      estados[5][2]=10;      estados[5][3]=10;    estados[5][4]=10;    estados[5][5]=10;      estados[5][6]=10;       estados[5][7]=10;       estados[5][8]=10;       estados[5][9]=10;       estados[5][11]=10;                              estados[5][13]=10;
-        estados[6][0]=10;    estados[6][1]=10;      estados[6][2]=10;      estados[6][3]=10;    estados[6][4]=10;    estados[6][5]=10;      estados[6][6]=10;       estados[6][7]=10;       estados[6][8]=10;       estados[6][9]=10;       estados[6][11]=10;                              estados[6][13]=10;
-        estados[7][0]=10;    estados[7][1]=10;      estados[7][2]=10;      estados[7][3]=10;    estados[7][4]=7;     estados[7][5]=10;      estados[7][6]=10;       estados[7][7]=10;       estados[7][8]=10;       estados[7][9]=10;       estados[7][11]=10;                              estados[7][13]=10;
-        estados[8][0]=10;    estados[8][1]=10;      estados[8][2]=10;      estados[8][3]=10;    estados[8][4]=10;    estados[8][5]=10;      estados[8][6]=10;       estados[8][7]=10;       estados[8][8]=10;       estados[8][9]=10;       estados[8][11]=10;                              estados[8][13]=10;
-        estados[9][0]=10;    estados[9][1]=15;      estados[9][2]=10;      estados[9][3]=10;    estados[9][4]=10;    estados[9][5]=10;      estados[9][6]=10;       estados[9][7]=10;       estados[9][8]=10;       estados[9][9]=10;       estados[9][11]=10;                              estados[9][13]=10;
-        estados[10][0]=10;   estados[10][1]=10;     estados[10][2]=10;     estados[10][3]=10;   estados[10][4]=10;   estados[10][5]=10;     estados[10][6]=10;      estados[10][7]=10;      estados[10][8]=10;      estados[10][9]=10;      estados[10][11]=10;                             estados[10][13]=10;
-        estados[11][0]=11;   estados[11][1]=11;     estados[11][2]=11;     estados[11][3]=11;   estados[11][4]=11;   estados[11][5]=11;     estados[11][6]=12;      estados[11][7]=11;      estados[11][8]=11;      estados[11][9]=11;      estados[11][11]=11;     estados[11][12]=11;     estados[11][13]=11;
-        estados[12][0]=10;   estados[12][1]=10;     estados[12][2]=10;     estados[12][3]=10;   estados[12][4]=10;   estados[12][5]=10;     estados[12][6]=10;      estados[12][7]=10;      estados[12][8]=10;      estados[12][9]=10;      estados[12][11]=10;                             estados[12][13]=10;
-        estados[13][0]=10;   estados[13][1]=10;     estados[13][2]=10;     estados[13][3]=10;   estados[13][4]=10;   estados[13][5]=10;     estados[13][6]=10;      estados[13][7]=10;      estados[13][8]=10;      estados[13][9]=10;      estados[13][11]=10;                             estados[13][13]=10;
-        estados[14][0]=10;   estados[14][1]=10;     estados[14][2]=10;     estados[14][3]=10;   estados[14][4]=10;   estados[14][5]=10;     estados[14][6]=10;      estados[14][7]=10;      estados[14][8]=10;      estados[14][9]=10;      estados[14][11]=10;                             estados[14][13]=10;
-        estados[15][0]=10;   estados[15][1]=15;     estados[15][2]=10;     estados[15][3]=10;   estados[15][4]=10;   estados[15][5]=15;     estados[15][6]=10;      estados[15][7]=10;      estados[15][8]=10;      estados[15][9]=10;      estados[15][11]=10;                             estados[15][13]=10;
+        estados[0][0]=1;     estados[0][1]=3;       estados[0][2]=6;       estados[0][3]=8;     estados[0][4]=7;     estados[0][5]=4;       estados[0][6]=11;       estados[0][7]=13;       estados[0][8]=1;        estados[0][9]=2;        estados[0][11]=14;                              estados[0][13]=9;    estados[0][14]=16;
+        estados[1][0]=1;     estados[1][1]=1;       estados[1][2]=10;      estados[1][3]=10;    estados[1][4]=10;    estados[1][5]=1;       estados[1][6]=10;       estados[1][7]=10;       estados[1][8]=1;        estados[1][9]=1;        estados[1][11]=10;                              estados[1][13]=10;   estados[1][14]=10;
+        estados[2][0]=10;    estados[2][1]=10;      estados[2][2]=10;      estados[2][3]=10;    estados[2][4]=10;    estados[2][5]=10;      estados[2][6]=10;       estados[2][7]=10;       estados[2][8]=10;       estados[2][9]=10;       estados[2][11]=10;                              estados[2][13]=10;   estados[2][14]=10;
+        estados[3][0]=10;    estados[3][1]=3;       estados[3][2]=10;      estados[3][3]=10;    estados[3][4]=10;    estados[3][5]=3;       estados[3][6]=10;       estados[3][7]=10;       estados[3][8]=10;       estados[3][9]=10;       estados[3][11]=10;                              estados[3][13]=10;   estados[3][14]=10;
+        estados[4][0]=10;    estados[4][1]=5;       estados[4][2]=10;      estados[4][3]=10;    estados[4][4]=10;    estados[4][5]=5;       estados[4][6]=10;       estados[4][7]=10;       estados[4][8]=10;       estados[4][9]=10;       estados[4][11]=10;                              estados[4][13]=10;   estados[4][14]=10;
+        estados[5][0]=10;    estados[5][1]=10;      estados[5][2]=10;      estados[5][3]=10;    estados[5][4]=10;    estados[5][5]=10;      estados[5][6]=10;       estados[5][7]=10;       estados[5][8]=10;       estados[5][9]=10;       estados[5][11]=10;                              estados[5][13]=10;   estados[5][14]=10;
+        estados[6][0]=10;    estados[6][1]=10;      estados[6][2]=10;      estados[6][3]=10;    estados[6][4]=10;    estados[6][5]=10;      estados[6][6]=10;       estados[6][7]=10;       estados[6][8]=10;       estados[6][9]=10;       estados[6][11]=10;                              estados[6][13]=10;   estados[6][14]=10;
+        estados[7][0]=10;    estados[7][1]=10;      estados[7][2]=10;      estados[7][3]=10;    estados[7][4]=7;     estados[7][5]=10;      estados[7][6]=10;       estados[7][7]=10;       estados[7][8]=10;       estados[7][9]=10;       estados[7][11]=10;                              estados[7][13]=10;   estados[7][14]=10;
+        estados[8][0]=10;    estados[8][1]=10;      estados[8][2]=10;      estados[8][3]=10;    estados[8][4]=10;    estados[8][5]=10;      estados[8][6]=10;       estados[8][7]=10;       estados[8][8]=10;       estados[8][9]=10;       estados[8][11]=10;                              estados[8][13]=10;   estados[8][14]=10;
+        estados[9][0]=10;    estados[9][1]=15;      estados[9][2]=10;      estados[9][3]=10;    estados[9][4]=10;    estados[9][5]=10;      estados[9][6]=10;       estados[9][7]=10;       estados[9][8]=10;       estados[9][9]=10;       estados[9][11]=10;                              estados[9][13]=10;   estados[9][14]=10;
+        estados[10][0]=10;   estados[10][1]=10;     estados[10][2]=10;     estados[10][3]=10;   estados[10][4]=10;   estados[10][5]=10;     estados[10][6]=10;      estados[10][7]=10;      estados[10][8]=10;      estados[10][9]=10;      estados[10][11]=10;                             estados[10][13]=10;  estados[10][14]=10;
+        estados[11][0]=11;   estados[11][1]=11;     estados[11][2]=11;     estados[11][3]=11;   estados[11][4]=11;   estados[11][5]=11;     estados[11][6]=12;      estados[11][7]=11;      estados[11][8]=11;      estados[11][9]=11;      estados[11][11]=11;     estados[11][12]=11;     estados[11][13]=11;  estados[11][14]=11;
+        estados[12][0]=10;   estados[12][1]=10;     estados[12][2]=10;     estados[12][3]=10;   estados[12][4]=10;   estados[12][5]=10;     estados[12][6]=10;      estados[12][7]=10;      estados[12][8]=10;      estados[12][9]=10;      estados[12][11]=10;                             estados[12][13]=10;  estados[12][14]=10;
+        estados[13][0]=10;   estados[13][1]=10;     estados[13][2]=10;     estados[13][3]=10;   estados[13][4]=10;   estados[13][5]=10;     estados[13][6]=10;      estados[13][7]=10;      estados[13][8]=10;      estados[13][9]=10;      estados[13][11]=10;                             estados[13][13]=10;  estados[13][14]=10;
+        estados[14][0]=10;   estados[14][1]=10;     estados[14][2]=10;     estados[14][3]=10;   estados[14][4]=10;   estados[14][5]=10;     estados[14][6]=10;      estados[14][7]=10;      estados[14][8]=10;      estados[14][9]=10;      estados[14][11]=10;                             estados[14][13]=10;  estados[14][14]=10;
+        estados[15][0]=10;   estados[15][1]=15;     estados[15][2]=10;     estados[15][3]=10;   estados[15][4]=10;   estados[15][5]=15;     estados[15][6]=10;      estados[15][7]=10;      estados[15][8]=10;      estados[15][9]=10;      estados[15][11]=10;                             estados[15][13]=10;  estados[15][14]=10;
+        estados[0][10]=10;   
+        estados[16][0]=10;   estados[16][1]=10;     estados[16][2]=10;     estados[16][3]=10;   estados[16][4]=10;   estados[16][5]=15;     estados[16][6]=10;      estados[16][7]=10;      estados[16][8]=10;      estados[16][9]=10;      estados[16][11]=10;                             estados[16][13]=10;  estados[16][14]=17;
+        estados[17][0]=17;   estados[17][1]=17;     estados[17][2]=17;     estados[17][3]=17;   estados[17][4]=17;   estados[17][5]=17;     estados[17][6]=17;      estados[17][7]=17;      estados[17][8]=17;      estados[17][9]=17;      estados[17][11]=17;      estados[17][12]=17;    estados[17][13]=17;  estados[17][14]=17;
         
     }
     // se recibe la linea a analizar, el path del archivo de los movimientos, el de los errores, el del archivo del 
@@ -148,6 +152,8 @@ public class Analizar {
                 }
                 
                 
+                
+                
                                 
                 if(estadoActual==5||estadoActual==10){
                     
@@ -199,7 +205,7 @@ public class Analizar {
     private int getSiguienteEstado(int estadoActual, int caracter){
         int resultado = 10;        
         
-        if(caracter >=0 && caracter <=13){
+        if(caracter >=0 && caracter <=20){
             resultado = estados[estadoActual][caracter];
         }
     
@@ -210,7 +216,7 @@ public class Analizar {
     private int getIntCaracter(char caracter){
         int resultado = 10;
         
-        if(Character.isLetter(caracter)){
+        if(Character.isLowerCase(caracter)){
             resultado =0;
         } else if(Character.isDigit(caracter)){
             if(caracter!='0'){
@@ -219,25 +225,25 @@ public class Analizar {
                 resultado=5;
             }    
         } else if(caracter=='.'){
-            resultado = 2;
+            resultado = 11;
         } else if(caracter==','){
-            resultado = 2;
+            resultado = 11;
         }else if(caracter==';'){
-            resultado = 2;
+            resultado = 11;
         } else if(caracter==':'){
-            resultado = 2;
+            resultado = 11;
         } else if(Character.isMirrored(caracter)){
             resultado =3;
         }else if(caracter == '+'){
             resultado = 4;
         }else if(caracter == '-'){
-            resultado = 13;
+            resultado = 11;
         }else if(caracter == '*'){
             resultado = 4;
         }else if(caracter == '/'){
-            resultado = 4;
+            resultado = 14;
         }else if(caracter == '%'){
-            resultado = 4;
+            resultado = 11;
         }else if(Character.isSpaceChar(caracter)){
             resultado =12;
         }else if(caracter=='"'){
