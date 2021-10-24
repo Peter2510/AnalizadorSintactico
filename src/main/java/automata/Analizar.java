@@ -114,23 +114,42 @@ public class Analizar {
         
         while((posicion<linea.length())&&(lectura==true)){
             
-                // idea = separar si el caracter es espacio y si no esta en el estado 12
+                // idea = separar si el caracter es espacio y si no esta en el estado 11
             if ( (Character.isSpaceChar(linea.charAt(posicion)) && estadoActual!=11)  == true || (linea.charAt(posicion)==tabulacion ) == true  ) {
                
                 lectura = false;
                 System.out.println("Estado actual si encontro espacio" + estadoActual);
             }
             else{
+                
+                
+                
+                
                 System.out.println("Intento evaluar el signo con espacio");
                 tmp = tmp + String.valueOf(linea.charAt(posicion));
                 int estadoTemporal = getSiguienteEstado(estadoActual, getIntCaracter(linea.charAt(posicion)));
+               
                 
+                char comilla = '"';
+                          
                 guardarMovimientos.AgregarAlArchivo(pathMovimientos + ".txt", "Estado actual "+ estadoActual + " caracter a leer: " + linea.charAt(posicion)+ " transicion al estado: " + estadoTemporal + " al leer el caracter: " + linea.charAt(posicion));
                           
                 estadoActual = estadoTemporal;
                 
+                
+                if(estadoActual==11&&posicion==linea.length()-1){
+                    
+                    if(linea.charAt(posicion)!=comilla){
+                        estadoActual=10;
+                    }else{
+                        System.out.println("NO tendira porque entrar");
+                    }
+                    
+                }
+                
+                
                                 
-                if(estadoActual==10||estadoActual==5){
+                if(estadoActual==5||estadoActual==10){
                     
                     errores.AgregarAlArchivo(pathErrores+".txt",tmp +  "\t\t\t\t\t(" + (numeroLinea+1) + "," + (posicion+1) + ")" );
                     guardarMovimientos.AgregarAlArchivo(pathMovimientos + ".txt", "Error en la linea " + (numeroLinea+1) + " en la posicion " + (posicion+1));
@@ -158,6 +177,11 @@ public class Analizar {
         
         
         //Aceptacion estadoFinal = new Aceptacion(tmp,estadoActual,pathMovimientos,posFinal);
+        
+//        if(estadoActual==11&&posicion==linea.length()||estadoActual==1&&posicion==1){
+//            System.out.println("Error, no se reconoce la doble comiila");
+//        }
+        
          
         if(estadoActual==10||estadoActual==5){
             String tmplectura ="";
@@ -169,7 +193,7 @@ public class Analizar {
         System.out.println("Linea entera " + tmp);
          
     }
-    
+   // }
     
     // moverse entre estados
     private int getSiguienteEstado(int estadoActual, int caracter){
