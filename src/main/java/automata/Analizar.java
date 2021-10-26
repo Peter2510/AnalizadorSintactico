@@ -58,7 +58,7 @@ public class Analizar {
         
                
         //estados de aceptacion "totales"
-        //id --> 1              entero positivo --> 3,4     puntuacion --> 6   
+        //id --> 1              entero positivo --> 3,4        
         //operador -->7         agrupacion -->  8           literal --> 12
         //asignacion -->13      simbolos --> 14             numero negativo -->15
        
@@ -67,7 +67,7 @@ public class Analizar {
         
                                                                                                                                                                                                                                                                                                                                                   //EMPIEZAN LETRAS                                
         //matriz[estado][caracter]=estado;                                                                                                                                                                                                                                                                                                        E                     F                       R                       I                       S                       V                       N                       A                       MAYUSCULAS EXCLUSIVAS                                             
-        estados[0][0]=1;     estados[0][1]=3;       estados[0][2]=6;       estados[0][3]=8;     estados[0][4]=7;     estados[0][5]=4;       estados[0][6]=11;       estados[0][7]=13;       estados[0][8]=1;        estados[0][9]=2;        estados[0][11]=14;                              estados[0][13]=9;       estados[0][14]=16;            estados[0][15]=18;    estados[0][16]=21;      estados[0][17]=24;      estados[0][18]=25;      estados[0][19]=26;      estados[0][20]=27;      estados[0][21]=10;      estados[0][22]=10;      estados[0][23]=10;         
+        estados[0][0]=1;     estados[0][1]=3;       estados[0][2]=6;       estados[0][3]=8;     estados[0][4]=7;     estados[0][5]=4;       estados[0][6]=11;       estados[0][7]=13;       estados[0][8]=1;        estados[0][9]=2;        estados[0][11]=10;                              estados[0][13]=9;       estados[0][14]=16;            estados[0][15]=18;    estados[0][16]=21;      estados[0][17]=24;      estados[0][18]=25;      estados[0][19]=26;      estados[0][20]=27;      estados[0][21]=10;      estados[0][22]=10;      estados[0][23]=10;         
         estados[1][0]=1;     estados[1][1]=1;       estados[1][2]=10;      estados[1][3]=10;    estados[1][4]=10;    estados[1][5]=1;       estados[1][6]=10;       estados[1][7]=10;       estados[1][8]=1;        estados[1][9]=1;        estados[1][11]=10;                              estados[1][13]=10;      estados[1][14]=10;            estados[1][15]=1;     estados[1][16]=1;       estados[1][17]=1;       estados[1][18]=1;       estados[1][19]=1;       estados[1][20]=1;       estados[1][21]=1;       estados[1][22]=1;       estados[1][23]=1;          
         estados[2][0]=10;    estados[2][1]=10;      estados[2][2]=10;      estados[2][3]=10;    estados[2][4]=10;    estados[2][5]=10;      estados[2][6]=10;       estados[2][7]=10;       estados[2][8]=10;       estados[2][9]=10;       estados[2][11]=10;                              estados[2][13]=10;      estados[2][14]=10;            estados[2][15]=10;    estados[2][16]=10;      estados[2][17]=10;      estados[2][18]=10;      estados[2][19]=10;      estados[2][20]=10;      estados[2][21]=10;      estados[2][22]=10;      estados[2][23]=10;         
         estados[3][0]=10;    estados[3][1]=3;       estados[3][2]=10;      estados[3][3]=10;    estados[3][4]=10;    estados[3][5]=3;       estados[3][6]=10;       estados[3][7]=10;       estados[3][8]=10;       estados[3][9]=10;       estados[3][11]=10;                              estados[3][13]=10;      estados[3][14]=10;            estados[3][15]=10;    estados[3][16]=10;      estados[3][17]=10;      estados[3][18]=10;      estados[3][19]=10;      estados[3][20]=10;      estados[3][21]=10;      estados[3][22]=10;      estados[3][23]=10;         
@@ -294,7 +294,7 @@ public class Analizar {
         String posFinal = posFila + "," + posCol;
         
         
-        //Aceptacion estadoFinal = new Aceptacion(tmp,estadoActual,pathMovimientos,posFinal);
+        Aceptacion estadoFinal = new Aceptacion(tmp,estadoActual,pathMovimientos,posFinal);
         
 //        if(estadoActual==11&&posicion==linea.length()||estadoActual==1&&posicion==1){
 //            System.out.println("Error, no se reconoce la doble comiila");
@@ -306,7 +306,7 @@ public class Analizar {
          for(int i = posicion; i < linea.length();i++){
                         tmplectura = tmplectura + String.valueOf(linea.charAt(i));
                     }
-         //guardarMovimientos.AgregarAlArchivo(pathMovimientos+".txt","\nRECUPERACION DE ERRORES, Se leera: "+ tmplectura);
+         guardarMovimientos.AgregarAlArchivo(pathMovimientos+".txt","\nRECUPERACION DE ERRORES, Se leera: "+ tmplectura);
         } 
         System.out.println("Linea entera " + tmp);
         

@@ -17,7 +17,7 @@ import manejoarchivos.ManejoArchivos;
  */
 public class Aceptacion {
 
-    private String infoAceptacion[] = new String[11];
+    private String infoAceptacion[] = new String[28];
     private ManejoArchivos guardarTokensUnicos = new ManejoArchivos();
     private String pathMovimientos;
     private ManejoArchivos guardarTokensSinError = new ManejoArchivos();
@@ -58,25 +58,64 @@ public class Aceptacion {
 
         //id
         infoAceptacion[1] = "id\t\t";
-        infoAceptacion[2] = "id\t\t";
-        //entero
+        //infoAceptacion[2] = "guion medio\t\t";
+        
+        //entero positivo
 
         infoAceptacion[3] = "entero\t\t";
+        
+        //entero positivo
+        infoAceptacion[4] = "entero\t\t";
         //decimal
 
-        infoAceptacion[5] = "decimal\t\t";
+        //infoAceptacion[5] = "decimal\t\t";
         //puntuacion
 
-        infoAceptacion[6] = "signo de puntuacion";
+        //infoAceptacion[6] = "signo de puntuacion";
         //agrupacion
 
         infoAceptacion[8] = "signo de agrupacion";
         //operador
 
         infoAceptacion[7] = "signo de operacion";
+        
+        //literal
+        infoAceptacion[12] = "literal";
+        
+        //asignacion
+        infoAceptacion[13] = "asignacion";
+        
+        infoAceptacion[15] = "negativo";
+        //comentario
+        infoAceptacion[17] = "comentario";
+        
+        //ESCRIBIR
+        infoAceptacion[19] = "ESCRIBIR";
+        
+        //ENTONCES
+        infoAceptacion[20] = "ENTONCES";
+        
+        //FIN
+        infoAceptacion[22] = "FIN";
+        
+        //FALSO
+        infoAceptacion[23] = "FALSO";
+        
+        //REPETIR
+        infoAceptacion[24] = "REPETIR";
+        
+        //INICIAR
+        infoAceptacion[25] = "INICIAR";
+        
+        //SI
+        infoAceptacion[26] = "SI";
+        
+        //VERDADERO
+        infoAceptacion[27] = "VERDADERO";
+        
 
         infoAceptacion[10] = "error";
-        infoAceptacion[4] = "error";
+        infoAceptacion[5] = "error";
 
     }
 
@@ -91,13 +130,13 @@ public class Aceptacion {
             tokensValidos.add(lexema);
             infoTokensValidos.add(infoAceptacion[estado]);
         } */
-        if ((estado > 0 && estado < 10) && !(estado == 4)) {
+        if ((estado > 0 && estado < 29) && !(estado == 5)) {
             guardarMovimientos.AgregarAlArchivo(pathMovimientos + ".txt", "El lexema " + lexema + " es un " + infoAceptacion[estado] + "\n");
             guardarMovimientos.AgregarAlArchivo(pathMovimientos + ".txt", "Siguiente lectura");
             tokensValidos.add(lexema);
             infoTokensValidos.add(infoAceptacion[estado]);
             infoPosicion.add(posicion);
-            //System.out.println("Guarde el lexema" + lexema);
+            System.out.println("Guarde el lexema" + lexema);
 
         } else {
 
@@ -128,7 +167,7 @@ public class Aceptacion {
         eliminarDuplicados();
         //System.out.println("Entre al recuento");
         
-        for (int i = 0; i < unicos.size(); i++) {
+        for (int i = 0; i < tokensValidos.size(); i++) {
 
             guardarReporte.AgregarAlArchivo(path1 + ".txt", infoTokensValidos.get(i) + "\t\t"+ tokensValidos.get(i) + "\t\t\t\t"+ infoPosicion.get(i));
             
