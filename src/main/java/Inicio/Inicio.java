@@ -18,6 +18,7 @@ public class Inicio {
     public static void main(String[] args) {
         //Inicial e = new Inicial();
         Info er = new Info();
+        
     }
     
     
