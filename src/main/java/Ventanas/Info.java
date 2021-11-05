@@ -5,6 +5,8 @@
  */
 package Ventanas;
 
+import automata.Analizar;
+
 /**
  *
  * @author GORDILLO G

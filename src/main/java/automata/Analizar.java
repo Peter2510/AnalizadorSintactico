@@ -26,7 +26,7 @@ public class Analizar {
     private ManejoArchivos errores = new ManejoArchivos();
     private int marcarError =0;
     private int erroresTotales = 0;
-    
+    private int numeroDeLineas;
     
     
     private void InicializarMatriz(){
@@ -100,8 +100,8 @@ public class Analizar {
     }
     // se recibe la linea a analizar, el path del archivo de los movimientos, el de los errores, el del archivo del 
     //documento si no hay errores y el del archivo que guarda los tokens si no hay errores.
-    public Analizar(String linea, int numeroLinea,String pathMovimientos,String pathErrores) {
-        
+    public Analizar(String linea, int numeroLinea,String pathMovimientos,String pathErrores, int noLineas) {
+        this.numeroDeLineas=noLineas;
         this.linea = linea;
         this.pathMovimientos = pathMovimientos;
         this.cantidadLineas = numeroLinea;
@@ -110,10 +110,14 @@ public class Analizar {
         InicializarMatriz();
         System.out.println("posicicon incial: " + posicion);
         guardarMovimientos.AgregarAlArchivo(pathMovimientos + ".txt", "\nLinea a analizar: " + linea);
+        
         while(posicion<linea.length()){
             getToken(linea,numeroLinea);
         }
-        
+        if((numeroLinea+1)==numeroDeLineas){
+            Aceptacion a = new Aceptacion(true);
+            
+        }
     }
 
     private void getToken(String linea, int numeroLinea) {
@@ -254,7 +258,7 @@ public class Analizar {
                     }
                 }//VERDADERO
                 if(posicion==linea.length()-1&&estadoActual==27){
-                    if(tmp.charAt(0)=='V'&&tmp.charAt(1)=='E'&&tmp.length()==2&&tmp.charAt(1)=='R'
+                    if(tmp.charAt(0)=='V'&&tmp.charAt(1)=='E'&&tmp.charAt(2)=='R'
                        &&tmp.charAt(3)=='D'&&tmp.charAt(4)=='A'&&tmp.charAt(5)=='D'&&tmp.charAt(6)=='E'&&
                             tmp.charAt(7)=='R'&&tmp.charAt(8)=='O'&&tmp.length()==9){
                         estadoActual=27;
@@ -264,7 +268,7 @@ public class Analizar {
                         System.out.println(tmp);
                         estadoActual=10;
                     }
-                }
+                                }
                 
                                 
                 if(estadoActual==5||estadoActual==10){
@@ -310,7 +314,6 @@ public class Analizar {
         } 
         System.out.println("Linea entera " + tmp);
         
-         
     }
    
     

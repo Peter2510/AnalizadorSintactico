@@ -5,9 +5,13 @@
  */
 package Ventanas;
 
+import static Ventanas.Inicial.txt;
 import automata.Aceptacion;
 import automata.Analizar;
 import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.event.CaretListener;
 import manejoarchivos.ManejoArchivos;
 import patrones.Patrones;
 
@@ -50,23 +54,36 @@ public class Inicial extends javax.swing.JFrame {
         txt = new javax.swing.JTextArea();
         GuardarTextoSinErrores = new javax.swing.JButton();
         analizar = new javax.swing.JButton();
-        txtBuscar = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        btnbuscar = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        salida = new javax.swing.JTextArea();
+        btnDeshacer = new javax.swing.JButton();
+        btnRehacer = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        MenuCargar = new javax.swing.JMenu();
+        NuevoArchivoItem = new javax.swing.JMenu();
+        CargarArchivoItem = new javax.swing.JMenuItem();
+        nuevoArchivoItem = new javax.swing.JMenuItem();
+        Guardar = new javax.swing.JMenu();
+        itemCambios = new javax.swing.JMenuItem();
+        menuGuardarComo = new javax.swing.JMenu();
+        txtFile = new javax.swing.JMenuItem();
+        pdfFile = new javax.swing.JMenuItem();
+        WordFile = new javax.swing.JMenuItem();
         menuLimpiar = new javax.swing.JMenu();
         recuento = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(51, 153, 255));
-
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel1.setText("ANALIZADOR LÉXICO");
+        jLabel1.setText("ANALIZADORES");
 
         txt.setColumns(20);
         txt.setRows(5);
+        txt.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtCaretUpdate(evt);
+            }
+        });
         jScrollPane1.setViewportView(txt);
 
         GuardarTextoSinErrores.setText("Guardar texto analizado sin errores");
@@ -83,20 +100,19 @@ public class Inicial extends javax.swing.JFrame {
             }
         });
 
-        txtBuscar.addActionListener(new java.awt.event.ActionListener() {
+        salida.setEditable(false);
+        salida.setColumns(20);
+        salida.setRows(5);
+        jScrollPane2.setViewportView(salida);
+
+        btnDeshacer.setText("Deshacer");
+        btnDeshacer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBuscarActionPerformed(evt);
+                btnDeshacerActionPerformed(evt);
             }
         });
 
-        jLabel2.setText("Buscar palabra:");
-
-        btnbuscar.setText("Buscar");
-        btnbuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnbuscarActionPerformed(evt);
-            }
-        });
+        btnRehacer.setText("Rehacer");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -104,52 +120,109 @@ public class Inicial extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 742, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(29, 29, 29)
+                                .addComponent(btnDeshacer)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnRehacer)
+                                .addGap(112, 112, 112)
+                                .addComponent(jLabel1))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(42, 42, 42)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 742, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(225, 225, 225)
-                        .addComponent(GuardarTextoSinErrores))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(295, 295, 295)
+                        .addGap(334, 334, 334)
                         .addComponent(analizar))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel2))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnbuscar)))))
-                .addContainerGap(60, Short.MAX_VALUE))
+                        .addGap(259, 259, 259)
+                        .addComponent(GuardarTextoSinErrores)))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnDeshacer)
+                            .addComponent(btnRehacer))))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(analizar)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(GuardarTextoSinErrores)
-                .addGap(26, 26, 26))
+                .addGap(32, 32, 32))
         );
 
-        MenuCargar.setText("Cargar archivo");
-        MenuCargar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                MenuCargarMouseClicked(evt);
+        NuevoArchivoItem.setText("Archivo");
+
+        CargarArchivoItem.setText("Cargar archivo");
+        CargarArchivoItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CargarArchivoItemActionPerformed(evt);
             }
         });
-        jMenuBar1.add(MenuCargar);
+        NuevoArchivoItem.add(CargarArchivoItem);
+
+        nuevoArchivoItem.setText("Nuevo archivo");
+        nuevoArchivoItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nuevoArchivoItemActionPerformed(evt);
+            }
+        });
+        NuevoArchivoItem.add(nuevoArchivoItem);
+
+        jMenuBar1.add(NuevoArchivoItem);
+
+        Guardar.setText("Guardar");
+        Guardar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                GuardarMouseClicked(evt);
+            }
+        });
+
+        itemCambios.setText("Guardar cambios");
+        itemCambios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemCambiosActionPerformed(evt);
+            }
+        });
+        Guardar.add(itemCambios);
+
+        menuGuardarComo.setText("Guardar como");
+
+        txtFile.setText("Documento de texto");
+        txtFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFileActionPerformed(evt);
+            }
+        });
+        menuGuardarComo.add(txtFile);
+
+        pdfFile.setText("Documento PDF");
+        pdfFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pdfFileActionPerformed(evt);
+            }
+        });
+        menuGuardarComo.add(pdfFile);
+
+        WordFile.setText("Documento Word");
+        menuGuardarComo.add(WordFile);
+
+        Guardar.add(menuGuardarComo);
+
+        jMenuBar1.add(Guardar);
 
         menuLimpiar.setText("Eliminar texto");
         menuLimpiar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -166,6 +239,14 @@ public class Inicial extends javax.swing.JFrame {
             }
         });
         jMenuBar1.add(recuento);
+
+        jMenu2.setText("Acerca de");
+        jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu2MouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
 
@@ -192,14 +273,8 @@ public class Inicial extends javax.swing.JFrame {
 
     }//GEN-LAST:event_GuardarTextoSinErroresActionPerformed
 
-    private void MenuCargarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuCargarMouseClicked
-        // se muestra la opcion para cargar el archivo de texto
-        ManejoArchivos manejo = new ManejoArchivos();
-        manejo.leerArchivoLinea();
-    }//GEN-LAST:event_MenuCargarMouseClicked
-
     private void analizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_analizarActionPerformed
-
+        
         String txtIngresado = txt.getText();
 
         if (txtIngresado.length() > 0) {
@@ -231,7 +306,7 @@ public class Inicial extends javax.swing.JFrame {
                 // System.out.println("mande linea " + i);
                 // se manda la linea, el numero de linea, el path del movimiento, el path de los errores 
                 // y el path del archivo si no hay errrores
-                Analizar analizar = new Analizar(lineas[i], i, pathMovimientos, pathErrores);
+                Analizar analizar = new Analizar(lineas[i], i, pathMovimientos, pathErrores,lineas.length);
                 contadorError = analizar.getError();
                 //se cuenta el numero de errores obtenidos
                 contadorFinalErrores = contadorFinalErrores + contadorError;
@@ -244,7 +319,7 @@ public class Inicial extends javax.swing.JFrame {
 
                 JOptionPane.showMessageDialog(null, "Selecciona la ubicacion y nombre del archivo que contiene el reporte");
                 ManejoArchivos ArchivoReporte = new ManejoArchivos();
-                String Reporte = "Tipo token \t\t\tLexema\t\t\tPosicion(linea,columna)";
+                String Reporte = "Tipo token \t\t\tLexema\t\t\tPosicion(columna,linea)";
                 String path = ArchivoReporte.guardarArchivo(Reporte);
                 Aceptacion recuentoTotal = new Aceptacion(path);
                 JOptionPane.showMessageDialog(null, "No se encontraron errores, se habilito la opcion del recuento de tokens");
@@ -279,22 +354,44 @@ public class Inicial extends javax.swing.JFrame {
 
     }//GEN-LAST:event_recuentoMouseClicked
 
-    private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed
-        String aBuscar = txtBuscar.getText();
-        String textoTotal = txt.getText();
+    private void txtCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtCaretUpdate
+     
+        
+    }//GEN-LAST:event_txtCaretUpdate
 
-        if (textoTotal.length() > 0 && aBuscar.length()>0) {
-            Patrones patron = new Patrones(aBuscar, textoTotal);
-        } else {
-            JOptionPane.showMessageDialog(null, "No hay texto para buscar lo solicitado");
-        }
-
-
-    }//GEN-LAST:event_btnbuscarActionPerformed
-
-    private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
+    private void GuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_GuardarMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtBuscarActionPerformed
+    }//GEN-LAST:event_GuardarMouseClicked
+
+    private void itemCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCambiosActionPerformed
+        System.out.println("Hlla");
+    }//GEN-LAST:event_itemCambiosActionPerformed
+
+    private void txtFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFileActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFileActionPerformed
+
+    private void pdfFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pdfFileActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pdfFileActionPerformed
+
+    private void CargarArchivoItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CargarArchivoItemActionPerformed
+        // se muestra la opcion para cargar el archivo de texto
+        ManejoArchivos manejo = new ManejoArchivos();
+        manejo.leerArchivoLinea();
+    }//GEN-LAST:event_CargarArchivoItemActionPerformed
+
+    private void nuevoArchivoItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoArchivoItemActionPerformed
+        
+    }//GEN-LAST:event_nuevoArchivoItemActionPerformed
+
+    private void btnDeshacerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeshacerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDeshacerActionPerformed
+
+    private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
+        AcercaDe info = new AcercaDe();
+    }//GEN-LAST:event_jMenu2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -303,18 +400,28 @@ public class Inicial extends javax.swing.JFrame {
   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem CargarArchivoItem;
+    private javax.swing.JMenu Guardar;
     private javax.swing.JButton GuardarTextoSinErrores;
-    private javax.swing.JMenu MenuCargar;
+    private javax.swing.JMenu NuevoArchivoItem;
+    private javax.swing.JMenuItem WordFile;
     private javax.swing.JButton analizar;
-    private javax.swing.JButton btnbuscar;
+    private javax.swing.JButton btnDeshacer;
+    private javax.swing.JButton btnRehacer;
+    private javax.swing.JMenuItem itemCambios;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JMenu menuGuardarComo;
     private javax.swing.JMenu menuLimpiar;
+    private javax.swing.JMenuItem nuevoArchivoItem;
+    private javax.swing.JMenuItem pdfFile;
     private javax.swing.JMenu recuento;
+    private javax.swing.JTextArea salida;
     public static javax.swing.JTextArea txt;
-    private javax.swing.JTextField txtBuscar;
+    private javax.swing.JMenuItem txtFile;
     // End of variables declaration//GEN-END:variables
 }

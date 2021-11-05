@@ -5,6 +5,7 @@
  */
 package manejoarchivos;
 
+
 import Ventanas.Inicial;
 import java.io.*;
 import javax.swing.JFileChooser;
@@ -186,6 +187,6 @@ public class ManejoArchivos {
             
         }
 
-    }
+    }   
 
 }
