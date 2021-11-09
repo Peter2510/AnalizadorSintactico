@@ -5,7 +5,7 @@
  */
 package Ventanas;
 
-import static Ventanas.Inicial.txt;
+
 import automata.Aceptacion;
 import automata.Analizar;
 import javax.swing.JOptionPane;
@@ -33,11 +33,15 @@ public class Inicial extends javax.swing.JFrame {
         this.setTitle("Analizador lexico");
         GuardarTextoSinErrores.setVisible(false);
         recuento.setVisible(false);
+        tablaTokens.setEnabled(false);
+        AnalisisLexico.setEnabled(false);
         numeroLinea = new NumeroLinea(txt);
         jScrollPane1.setRowHeaderView(numeroLinea);
         this.setVisible(true);
         this.setLocationRelativeTo(null);
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -58,6 +62,9 @@ public class Inicial extends javax.swing.JFrame {
         salida = new javax.swing.JTextArea();
         btnDeshacer = new javax.swing.JButton();
         btnRehacer = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        tablaTokens = new javax.swing.JButton();
+        AnalisisLexico = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         NuevoArchivoItem = new javax.swing.JMenu();
         CargarArchivoItem = new javax.swing.JMenuItem();
@@ -93,7 +100,7 @@ public class Inicial extends javax.swing.JFrame {
             }
         });
 
-        analizar.setText("Analizar");
+        analizar.setText("Análisis léxico");
         analizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 analizarActionPerformed(evt);
@@ -114,32 +121,54 @@ public class Inicial extends javax.swing.JFrame {
 
         btnRehacer.setText("Rehacer");
 
+        jLabel2.setText("Salida");
+
+        tablaTokens.setText("Mostrar tabla de tokens");
+        tablaTokens.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tablaTokensActionPerformed(evt);
+            }
+        });
+
+        AnalisisLexico.setText("Análisis Sintáctico");
+        AnalisisLexico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AnalisisLexicoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 742, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1045, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1043, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(29, 29, 29)
                                 .addComponent(btnDeshacer)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnRehacer)
-                                .addGap(112, 112, 112)
-                                .addComponent(jLabel1))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(42, 42, 42)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 742, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel1)
+                                .addGap(320, 320, 320))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(334, 334, 334)
-                        .addComponent(analizar))
+                        .addGap(411, 411, 411)
+                        .addComponent(GuardarTextoSinErrores))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(259, 259, 259)
-                        .addComponent(GuardarTextoSinErrores)))
-                .addContainerGap(23, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(jLabel2))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(253, 253, 253)
+                        .addComponent(analizar)
+                        .addGap(36, 36, 36)
+                        .addComponent(tablaTokens)
+                        .addGap(42, 42, 42)
+                        .addComponent(AnalisisLexico)))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,13 +184,18 @@ public class Inicial extends javax.swing.JFrame {
                             .addComponent(btnRehacer))))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(analizar)
+                .addGap(29, 29, 29)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(analizar)
+                    .addComponent(tablaTokens)
+                    .addComponent(AnalisisLexico))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(GuardarTextoSinErrores)
-                .addGap(32, 32, 32))
+                .addGap(22, 22, 22))
         );
 
         NuevoArchivoItem.setText("Archivo");
@@ -254,7 +288,10 @@ public class Inicial extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -264,17 +301,55 @@ public class Inicial extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void GuardarTextoSinErroresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarTextoSinErroresActionPerformed
+    private void menuLimpiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuLimpiarMouseClicked
+        txt.setText("");
+    }//GEN-LAST:event_menuLimpiarMouseClicked
 
+    private void recuentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_recuentoMouseClicked
+        JOptionPane.showMessageDialog(null, "Selecciona la ubicacion y nombre del archivo que contiene los tokens validos");
+        ManejoArchivos ArchivoRecuento = new ManejoArchivos();
+        String sinErrores = "Lexema\t\t\tTipo de token\t\t\tCantidad de repeticiones en el texto analizado";
+        String path = ArchivoRecuento.guardarArchivo(sinErrores);
+        Aceptacion recuentoTotal = new Aceptacion(path, 2);
+
+    }//GEN-LAST:event_recuentoMouseClicked
+
+    private void GuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_GuardarMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_GuardarMouseClicked
+
+    private void itemCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCambiosActionPerformed
+        System.out.println("Hlla");
+    }//GEN-LAST:event_itemCambiosActionPerformed
+
+    private void txtFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFileActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFileActionPerformed
+
+    private void pdfFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pdfFileActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pdfFileActionPerformed
+
+    private void CargarArchivoItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CargarArchivoItemActionPerformed
+        // se muestra la opcion para cargar el archivo de texto
         ManejoArchivos manejo = new ManejoArchivos();
-        String lectura = txt.getText();
-        manejo.guardarArchivo(lectura);
+        manejo.leerArchivoLinea();
+    }//GEN-LAST:event_CargarArchivoItemActionPerformed
 
+    private void nuevoArchivoItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoArchivoItemActionPerformed
+        
+    }//GEN-LAST:event_nuevoArchivoItemActionPerformed
 
-    }//GEN-LAST:event_GuardarTextoSinErroresActionPerformed
+    private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
+        AcercaDe info = new AcercaDe();
+    }//GEN-LAST:event_jMenu2MouseClicked
+
+    private void btnDeshacerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeshacerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDeshacerActionPerformed
 
     private void analizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_analizarActionPerformed
-        
+
         String txtIngresado = txt.getText();
 
         if (txtIngresado.length() > 0) {
@@ -304,19 +379,21 @@ public class Inicial extends javax.swing.JFrame {
             //se manda linea a linea el texto para analizarse
             for (int i = 0; i < lineas.length; i++) {
                 // System.out.println("mande linea " + i);
-                // se manda la linea, el numero de linea, el path del movimiento, el path de los errores 
+                // se manda la linea, el numero de linea, el path del movimiento, el path de los errores
                 // y el path del archivo si no hay errrores
                 Analizar analizar = new Analizar(lineas[i], i, pathMovimientos, pathErrores,lineas.length);
                 contadorError = analizar.getError();
                 //se cuenta el numero de errores obtenidos
                 contadorFinalErrores = contadorFinalErrores + contadorError;
-
+                
+                
             }
+            System.out.println("-*-*--** TERMINE TODODODODODODODODOD");
 
             //si no hay errores en el texto analizado se crea el archivo con los tokens y se habilita
             //la opcion de generar la copia del texto que se analizo y no tiene erores
             if (contadorFinalErrores == 0) {
-
+                
                 JOptionPane.showMessageDialog(null, "Selecciona la ubicacion y nombre del archivo que contiene el reporte");
                 ManejoArchivos ArchivoReporte = new ManejoArchivos();
                 String Reporte = "Tipo token \t\t\tLexema\t\t\tPosicion(columna,linea)";
@@ -325,11 +402,24 @@ public class Inicial extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "No se encontraron errores, se habilito la opcion del recuento de tokens");
                 GuardarTextoSinErrores.setVisible(true);
                 recuento.setVisible(true);
+                salida.setText("No se encontraron errores lexicos");
+                AnalisisLexico.setEnabled(true);
+                tablaTokens.setEnabled(true);
 
             } else {
+                Analizar as = new Analizar();
+                int cc = 0;
+                salida.append("ERRORES LEXICOS, SE TOMA EN CUENTA LA RECUPERACION DE ERRORES\n");
+                while(cc<as.ArrayErrores.size()){
+                    salida.append(as.ArrayErrores.get(cc));
+                    salida.append("\n");
+                    cc++;
+                }
+                as.ArrayErrores.clear();
                 GuardarTextoSinErrores.setVisible(false);
                 contadorFinalErrores = 0;
                 recuento.setVisible(false);
+                
                 ne.vaciarListas();
 
             }
@@ -337,61 +427,29 @@ public class Inicial extends javax.swing.JFrame {
         }else{
             JOptionPane.showMessageDialog(null,"Ingresa texto para analizar");
         }
-
     }//GEN-LAST:event_analizarActionPerformed
 
-    private void menuLimpiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuLimpiarMouseClicked
-        txt.setText("");
-    }//GEN-LAST:event_menuLimpiarMouseClicked
+    private void GuardarTextoSinErroresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarTextoSinErroresActionPerformed
 
-    private void recuentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_recuentoMouseClicked
-        JOptionPane.showMessageDialog(null, "Selecciona la ubicacion y nombre del archivo que contiene los tokens validos");
-        ManejoArchivos ArchivoRecuento = new ManejoArchivos();
-        String sinErrores = "Lexema\t\t\tTipo de token\t\t\tCantidad de repeticiones en el texto analizado";
-        String path = ArchivoRecuento.guardarArchivo(sinErrores);
-        Aceptacion recuentoTotal = new Aceptacion(path, 2);
+        ManejoArchivos manejo = new ManejoArchivos();
+        String lectura = txt.getText();
+        manejo.guardarArchivo(lectura);
 
-
-    }//GEN-LAST:event_recuentoMouseClicked
+    }//GEN-LAST:event_GuardarTextoSinErroresActionPerformed
 
     private void txtCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtCaretUpdate
-     
-        
+
     }//GEN-LAST:event_txtCaretUpdate
 
-    private void GuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_GuardarMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_GuardarMouseClicked
+    private void tablaTokensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tablaTokensActionPerformed
+        TablaTokens tabla = new TablaTokens();
+    }//GEN-LAST:event_tablaTokensActionPerformed
 
-    private void itemCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCambiosActionPerformed
-        System.out.println("Hlla");
-    }//GEN-LAST:event_itemCambiosActionPerformed
+    private void AnalisisLexicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnalisisLexicoActionPerformed
+ 
+        Aceptacion a = new Aceptacion(true);
 
-    private void txtFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFileActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtFileActionPerformed
-
-    private void pdfFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pdfFileActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_pdfFileActionPerformed
-
-    private void CargarArchivoItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CargarArchivoItemActionPerformed
-        // se muestra la opcion para cargar el archivo de texto
-        ManejoArchivos manejo = new ManejoArchivos();
-        manejo.leerArchivoLinea();
-    }//GEN-LAST:event_CargarArchivoItemActionPerformed
-
-    private void nuevoArchivoItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoArchivoItemActionPerformed
-        
-    }//GEN-LAST:event_nuevoArchivoItemActionPerformed
-
-    private void btnDeshacerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeshacerActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnDeshacerActionPerformed
-
-    private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
-        AcercaDe info = new AcercaDe();
-    }//GEN-LAST:event_jMenu2MouseClicked
+    }//GEN-LAST:event_AnalisisLexicoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -400,6 +458,7 @@ public class Inicial extends javax.swing.JFrame {
   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AnalisisLexico;
     private javax.swing.JMenuItem CargarArchivoItem;
     private javax.swing.JMenu Guardar;
     private javax.swing.JButton GuardarTextoSinErrores;
@@ -410,6 +469,7 @@ public class Inicial extends javax.swing.JFrame {
     private javax.swing.JButton btnRehacer;
     private javax.swing.JMenuItem itemCambios;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
@@ -420,7 +480,8 @@ public class Inicial extends javax.swing.JFrame {
     private javax.swing.JMenuItem nuevoArchivoItem;
     private javax.swing.JMenuItem pdfFile;
     private javax.swing.JMenu recuento;
-    private javax.swing.JTextArea salida;
+    public static javax.swing.JTextArea salida;
+    private javax.swing.JButton tablaTokens;
     public static javax.swing.JTextArea txt;
     private javax.swing.JMenuItem txtFile;
     // End of variables declaration//GEN-END:variables

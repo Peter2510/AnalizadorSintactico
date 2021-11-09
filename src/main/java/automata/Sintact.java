@@ -5,20 +5,19 @@
  */
 package automata;
 
-import java.util.ArrayList;
 import java.util.Stack;
 
 /**
  *
  * @author GORDILLO G
  */
-public class Sintactico {
+public class Sintact {
 
-    private int estadosSintactico[][] = new int[18][19];
-    private ArrayList<Token> ArrayTokens = new ArrayList<Token>();
-    private int contador = 0;
-    private int estadoActual = 0;
-    private Stack pila = new Stack();
+    private int estadosSintactico[][] = new int[21][21];
+    private Token token;
+    private static Stack pila = new Stack();
+    private int estadoTemporal;
+    private static int estadoActual = 0;
 
     public void incializarEstados() {
 
@@ -36,48 +35,51 @@ public class Sintactico {
         // id(valor) --> 11 , literal --> 12 , = --> 13,  VERDADERO -->14
         // FALSO --> 15 , SI --> 16 , id --> 17, REPETIR --> 18,  $ --> 19
         estadosSintactico[0][1] = 1;
-        estadosSintactico[0][14] = 2;
+        estadosSintactico[0][4] = 2;
+        estadosSintactico[0][6] = 2;
+        estadosSintactico[0][7] = 2;
+        estadosSintactico[0][15] = 3;
+        estadosSintactico[0][16] = 4;
+        estadosSintactico[0][17] = 5;
+        estadosSintactico[0][19] = 6;
     }
 
-    public Sintactico(ArrayList<Token> ArrayTokens) {
-        System.out.println(ArrayTokens.get(0).getTipo());
-        System.out.println(ArrayTokens.get(1).getTipo());
-        this.ArrayTokens = ArrayTokens;
+    public Sintact(Token token) {
+        
+        System.out.println();
+        
+        this.token = token;
         incializarEstados();
-        pila.push("$");
-        pila.push("Y");
-        System.out.println("------ ----- **** /// /// / /SINTACTICO");
-        inciar();
+        System.out.println("Entro" + token.getToken());
+        System.out.println(token.getTipo());
+        estadoActual=0;
+        evaluar();
+    }
 
-    }
-    public void inciar(){
+    public void evaluar() {
+        estadoActual=0;
         moverseEstados();
-        apilar();
-    }
-    
-    public void apilar(){
-        if(estadoActual==1){
-            pila.push("FIN");
-            pila.push("MOSTRAR");
-            pila.push("ESCRIBIR");
-            
+
+        if (token.getTipo().equals("ESCRIBIR") && estadoActual == 1) {
+            System.out.println("ESTADO 1");
+        } else if ((token.getTipo().equals("entero") || token.getTipo().equals("negativo")) && estadoActual == 2) {
+            System.out.println("ESTADO 2--");
+        }else if((token.getTipo()==null)&&estadoActual==6){
+            System.out.println("error");
         }
-        System.out.println(pila.peek());
     }
-    
-    
 
     public void moverseEstados() {
 
-        int estadoTemporal = getSiguienteEstado(estadoActual, getIntToken(ArrayTokens.get(contador).getTipo()));
+        int estadoTemporal = getSiguienteEstado(estadoActual, getIntToken(token.getTipo()));
         estadoActual = estadoTemporal;
-        
+
     }
 
     public int getSiguienteEstado(int estadoActualArriba, int intToken) {
-        int resultado = 17;
+        int resultado = 19;
 
-        if (intToken >= 0 && intToken <= 17) {
+        if (intToken >= 0 && intToken <=19) {
             resultado = estadosSintactico[estadoActualArriba][intToken];
 
         }
@@ -85,7 +87,7 @@ public class Sintactico {
     }
 
     public int getIntToken(String tipo) {
-        int resultado = 18;
+        int resultado = 19;
 
         if (tipo.equals("ESCRIBIR")) {
             resultado = 1;
@@ -96,35 +98,34 @@ public class Sintactico {
         } else if (tipo.equals("signo de agrupacion")) {
             resultado = 4;
         } else if (tipo.equals("entero")) {
-            resultado = 5;
-        } else if (tipo.equals("negativo")) {
             resultado = 6;
-        } else if (tipo.equals("INICIAR")) {
+        } else if (tipo.equals("negativo")) {
             resultado = 7;
-        } else if (tipo.equals("ENTONCES")) {
+        } else if (tipo.equals("INICIAR")) {
             resultado = 8;
-        } else if (tipo.equals("id(valor)")) {
+        } else if (tipo.equals("ENTONCES")) {
             resultado = 9;
-        } else if (tipo.equals("literal")) {
+        } else if (tipo.equals("id(valor)")) {
             resultado = 10;
-        } else if (tipo.equals("asignacion")) {
+        } else if (tipo.equals("literal")) {
             resultado = 11;
-        } else if (tipo.equals("VERDADERO")) {
+        } else if (tipo.equals("asignacion")) {
             resultado = 12;
-        } else if (tipo.equals("FALSO")) {
+        } else if (tipo.equals("VERDADERO")) {
             resultado = 13;
-        } else if (tipo.equals("SI")) {
+        } else if (tipo.equals("FALSO")) {
             resultado = 14;
-        } else if (tipo.equals("id")) {
+        } else if (tipo.equals("SI")) {
             resultado = 15;
-        } else if (tipo.equals("REPETIR")) {
+        } else if (tipo.equals("id")) {
             resultado = 16;
-        } else if (tipo.equals("ACEPTADO")) {
+        } else if (tipo.equals("REPETIR")) {
             resultado = 17;
+        } else if (tipo.equals("ACEPTADO")) {
+            resultado = 18;
         }
-
+        
+        System.out.println("retrono estado" + resultado);
         return resultado;
     }
-
-  
 }

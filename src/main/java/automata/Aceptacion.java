@@ -6,8 +6,8 @@
  */
 package automata;
 
+import Ventanas.Inicial;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import manejoarchivos.ManejoArchivos;
 
@@ -31,9 +31,9 @@ public class Aceptacion {
     private static ArrayList<String> infoPosicion = new ArrayList<String>();
     private static ArrayList<String> infoPosicionUnicos = new ArrayList<String>();
     private String posicion;
-    private static ArrayList<Token> ArrayTokens = new ArrayList<Token>();
+    public static ArrayList<Token> ArrayTokens = new ArrayList<Token>();
     
-
+    
     public Aceptacion(String lexema, int estado, String pathMovimientos, String posicion) {
 
         this.pathMovimientos = pathMovimientos;
@@ -53,10 +53,15 @@ public class Aceptacion {
     public Aceptacion() {
         vaciarListas();
     }
-    public Aceptacion(boolean eliminar){
+    
+    public Aceptacion(boolean b){
         mostrar();
-        vaciarArrayTokens();
     }
+    public Aceptacion(boolean d,int a){
+        System.out.println("mande tabla");
+    }
+    
+    
 
     public void inicializarMatriz() {
 
@@ -133,24 +138,25 @@ public class Aceptacion {
             tokensValidos.add(lexema);
             infoTokensValidos.add(infoAceptacion[estado]);
         } */
-        if ((estado > 0 && estado < 29) && !(estado == 5||estado==10)) {
+        if ((estado > 0 && estado < 29) && !(estado == 5||estado==10||estado==9)) {
             guardarMovimientos.AgregarAlArchivo(pathMovimientos + ".txt", "El lexema " + lexema + " es un " + infoAceptacion[estado] + "\n");
             guardarMovimientos.AgregarAlArchivo(pathMovimientos + ".txt", "Siguiente lectura");
 
-            if (estado != 17) {
+            if (estado != 17&&!(estado==18&&lexema.length()==1)) {
                 Token token = new Token(infoAceptacion[estado],posicion,lexema);
                 ArrayTokens.add(token);
                 tokensValidos.add(lexema);
                 infoTokensValidos.add(infoAceptacion[estado]);
                 infoPosicion.add(posicion);
-                System.out.println("Guarde el lexema" + lexema);
+                //System.out.println("Guarde el lexema" + lexema);
             } else {
-                System.out.println("No guarde comentario");
+                //System.out.println("No guarde comentario");
             }
 
         } else {
 
             guardarMovimientos.AgregarAlArchivo(pathMovimientos + ".txt", "El lexema " + lexema + " es un " + infoAceptacion[estado]);
+            
             guardarMovimientos.AgregarAlArchivo(pathMovimientos + ".txt", "Siguiente lectura");
         }
 
@@ -190,7 +196,7 @@ public class Aceptacion {
 
         for (int i = 0; i < tokensValidos.size(); i++) {
             if (tokensValidos.indexOf(tokensValidos.get(i)) != i && unicos.contains(tokensValidos.get(i))) {
-                System.out.println("Repertid");
+                //System.out.println("Repertid");
             } else {
                 unicos.add(tokensValidos.get(i));
                 infoUnicos.add(infoTokensValidos.get(i));
@@ -209,7 +215,7 @@ public class Aceptacion {
         infoUnicos.clear();
         infoPosicion.clear();
         infoPosicionUnicos.clear();
-
+        ArrayTokens.clear();
     }
 
     public void vaciarArrayTokens(){
@@ -217,13 +223,12 @@ public class Aceptacion {
     }
     
     public void mostrar(){
-        int con=0;
         
-        while(con<ArrayTokens.size()){
-            
-            System.out.println("---- Tipo "+ArrayTokens.get(con).getTipo()+ " lexema " + ArrayTokens.get(con).getToken());
-           con++;
-        }
+        //Sintactico s = new Sintactico(ArrayTokens);
+        //Sintact sin = new Sintact(ArrayTokens);
+        System.out.println("hoal desde mostrar");
+        AnalizadorSintactico analizador = new AnalizadorSintactico(ArrayTokens);
+        
         
     }
 }

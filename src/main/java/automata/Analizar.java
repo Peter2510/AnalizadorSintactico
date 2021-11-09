@@ -5,6 +5,8 @@
  * and open the template in the editor.
  */
 package automata;
+import Ventanas.Inicial;
+import java.util.ArrayList;
 import manejoarchivos.ManejoArchivos;
 
 /**
@@ -27,7 +29,12 @@ public class Analizar {
     private int marcarError =0;
     private int erroresTotales = 0;
     private int numeroDeLineas;
+    private boolean ConError=false;
+    public static ArrayList<String> ArrayErrores = new ArrayList<String>();
     
+    public Analizar(){
+        
+    }
     
     private void InicializarMatriz(){
           
@@ -108,16 +115,16 @@ public class Analizar {
         this.pathErrores = pathErrores;
         this.numeroLinea = numeroLinea;
         InicializarMatriz();
-        System.out.println("posicicon incial: " + posicion);
+        //System.out.println("posicicon incial: " + posicion);
         guardarMovimientos.AgregarAlArchivo(pathMovimientos + ".txt", "\nLinea a analizar: " + linea);
         
         while(posicion<linea.length()){
             getToken(linea,numeroLinea);
+            System.out.println("eT "+erroresTotales);
+            System.out.println("e "+marcarError);
         }
-        if((numeroLinea+1)==numeroDeLineas){
-            Aceptacion a = new Aceptacion(true);
-            
-        }
+        
+        
     }
 
     private void getToken(String linea, int numeroLinea) {
@@ -136,7 +143,7 @@ public class Analizar {
             if ( (Character.isSpaceChar(linea.charAt(posicion)) && estadoActual!=11)  == true || (linea.charAt(posicion)==tabulacion ) == true) {
                
                 lectura = false;
-                System.out.println("Estado actual si encontro espacio" + estadoActual);
+               // System.out.println("Estado actual si encontro espacio" + estadoActual);
                 
                 if(estadoActual==17){
                     lectura=true;
@@ -169,21 +176,36 @@ public class Analizar {
                     }else{
                         System.out.println("Error comilla");
                     }
+                 
+                    
+                    
+                }
+                try {
+                     //verificar palabras reservadas
+                if(posicion==linea.length()-1&&estadoActual==9){
+                    estadoActual=10;
                     
                 }
                 
-                //verificar palabras reservadas
+                
+                
                 //ESCRIBIR
-                if(posicion==linea.length()-1&&estadoActual==19){
+                if((tmp.length()==8)&&estadoActual==19){
+                    System.out.println("entre a evualar escribir");
+                    System.out.println(tmp.length());
                     if(tmp.charAt(0)=='E'&&tmp.charAt(1)=='S'&&tmp.charAt(2)=='C'
                             &&tmp.charAt(3)=='R'&&tmp.charAt(4)=='I'&&tmp.charAt(5)=='B'&&
                             tmp.charAt(6)=='I'&&tmp.charAt(7)=='R'&&tmp.length()==8){
                         estadoActual=19;
+                        System.out.println("ESCROBOR CORRECTO");
                         System.out.println("-----Termine en el estado ESCRIBIR");
                     }else{
                         System.out.println("Estoy en el estado 19 pero con fallas");
                         System.out.println(tmp);
+                        System.out.println("escribir incorecto");
+                        System.out.println("estou en" + estadoActual);
                         estadoActual=10;
+                        System.out.println("termien en " + estadoActual);
                     }
                 }
                 //ENTONCES
@@ -268,18 +290,34 @@ public class Analizar {
                         System.out.println(tmp);
                         estadoActual=10;
                     }
-                                }
+                    
+                 }
+                
+                } catch (Exception e) {
+                    estadoActual=10;
+                    marcarError=1;
+                    erroresTotales = erroresTotales + marcarError;
+                    ConError=true;
+                    lectura = false;
+                    System.out.println("no cumple con tamaño");
+                }
+               
+                if(posicion==linea.length()-1&&estadoActual==18){
+                    estadoActual=10;
+                }
                 
                                 
                 if(estadoActual==5||estadoActual==10){
-                    
+                    ConError=true;
                     errores.AgregarAlArchivo(pathErrores+".txt",tmp +  "\t\t\t\t\t(" + (numeroLinea+1) + "," + (posicion+1) + ")" );
                     guardarMovimientos.AgregarAlArchivo(pathMovimientos + ".txt", "Error en la linea " + (numeroLinea+1) + " en la posicion " + (posicion+1));
                     lectura = false;
                     marcarError=1;
                     erroresTotales = erroresTotales + marcarError;
                     System.out.println("Error en la liena " + (numeroLinea+1) + " en la psocicion " + (posicion+1));
-                    
+                    ArrayErrores.add("Error en la linea " + (numeroLinea+1) + " en la posición " + (posicion+1)+" con el lexema: "+ tmp);
+                    System.out.println("sicie" + ArrayErrores.size());
+                    System.out.println("ERROROROROROROROROROR");
                 } else{
                     
                     guardarMovimientos.AgregarAlArchivo(pathMovimientos + ".txt", "Siguiente lectura");
@@ -396,7 +434,6 @@ public class Analizar {
             }else{
                 resultado=10;
             }
-            
             
         }
         
