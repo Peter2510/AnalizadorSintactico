@@ -5,7 +5,6 @@
  */
 package Ventanas;
 
-
 import automata.Aceptacion;
 import automata.Analizar;
 import javax.swing.JOptionPane;
@@ -30,7 +29,7 @@ public class Inicial extends javax.swing.JFrame {
 
     public Inicial() {
         initComponents();
-        this.setTitle("Analizador lexico");
+        this.setTitle("PROYECTO FINAL");
         GuardarTextoSinErrores.setVisible(false);
         recuento.setVisible(false);
         tablaTokens.setEnabled(false);
@@ -40,8 +39,6 @@ public class Inicial extends javax.swing.JFrame {
         this.setVisible(true);
         this.setLocationRelativeTo(null);
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -82,7 +79,7 @@ public class Inicial extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel1.setText("ANALIZADORES");
+        jLabel1.setText("ANALIZADOR LÉXICO Y SINTÁCTICO");
 
         txt.setColumns(20);
         txt.setRows(5);
@@ -145,16 +142,15 @@ public class Inicial extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1045, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1043, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(btnDeshacer)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnRehacer)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel1)
-                                .addGap(320, 320, 320))))
+                                .addGap(242, 242, 242)
+                                .addComponent(jLabel1))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(411, 411, 411)
                         .addComponent(GuardarTextoSinErrores))
@@ -337,7 +333,7 @@ public class Inicial extends javax.swing.JFrame {
     }//GEN-LAST:event_CargarArchivoItemActionPerformed
 
     private void nuevoArchivoItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoArchivoItemActionPerformed
-        
+
     }//GEN-LAST:event_nuevoArchivoItemActionPerformed
 
     private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
@@ -351,6 +347,7 @@ public class Inicial extends javax.swing.JFrame {
     private void analizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_analizarActionPerformed
 
         String txtIngresado = txt.getText();
+        salida.setText("");
 
         if (txtIngresado.length() > 0) {
 
@@ -381,19 +378,18 @@ public class Inicial extends javax.swing.JFrame {
                 // System.out.println("mande linea " + i);
                 // se manda la linea, el numero de linea, el path del movimiento, el path de los errores
                 // y el path del archivo si no hay errrores
-                Analizar analizar = new Analizar(lineas[i], i, pathMovimientos, pathErrores,lineas.length);
+                Analizar analizar = new Analizar(lineas[i], i, pathMovimientos, pathErrores, lineas.length);
                 contadorError = analizar.getError();
                 //se cuenta el numero de errores obtenidos
                 contadorFinalErrores = contadorFinalErrores + contadorError;
-                
-                
+
             }
             System.out.println("-*-*--** TERMINE TODODODODODODODODOD");
 
             //si no hay errores en el texto analizado se crea el archivo con los tokens y se habilita
             //la opcion de generar la copia del texto que se analizo y no tiene erores
             if (contadorFinalErrores == 0) {
-                
+
                 JOptionPane.showMessageDialog(null, "Selecciona la ubicacion y nombre del archivo que contiene el reporte");
                 ManejoArchivos ArchivoReporte = new ManejoArchivos();
                 String Reporte = "Tipo token \t\t\tLexema\t\t\tPosicion(columna,linea)";
@@ -403,6 +399,7 @@ public class Inicial extends javax.swing.JFrame {
                 GuardarTextoSinErrores.setVisible(true);
                 recuento.setVisible(true);
                 salida.setText("No se encontraron errores lexicos");
+                JOptionPane.showMessageDialog(null, "No se encontraron errores léxicos");
                 AnalisisLexico.setEnabled(true);
                 tablaTokens.setEnabled(true);
 
@@ -410,7 +407,7 @@ public class Inicial extends javax.swing.JFrame {
                 Analizar as = new Analizar();
                 int cc = 0;
                 salida.append("ERRORES LEXICOS, SE TOMA EN CUENTA LA RECUPERACION DE ERRORES\n");
-                while(cc<as.ArrayErrores.size()){
+                while (cc < as.ArrayErrores.size()) {
                     salida.append(as.ArrayErrores.get(cc));
                     salida.append("\n");
                     cc++;
@@ -419,13 +416,13 @@ public class Inicial extends javax.swing.JFrame {
                 GuardarTextoSinErrores.setVisible(false);
                 contadorFinalErrores = 0;
                 recuento.setVisible(false);
-                
+
                 ne.vaciarListas();
 
             }
 
-        }else{
-            JOptionPane.showMessageDialog(null,"Ingresa texto para analizar");
+        } else {
+            JOptionPane.showMessageDialog(null, "Ingresa texto para analizar");
         }
     }//GEN-LAST:event_analizarActionPerformed
 
@@ -446,16 +443,19 @@ public class Inicial extends javax.swing.JFrame {
     }//GEN-LAST:event_tablaTokensActionPerformed
 
     private void AnalisisLexicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnalisisLexicoActionPerformed
- 
-        Aceptacion a = new Aceptacion(true);
+        JOptionPane.showMessageDialog(null, "Selecciona una ubicacion para guardar el archivo de salida del análisis sintáctico");
+        String[] datoss = new String[2];
+        ManejoArchivos guardarMovimientos = new ManejoArchivos();
+        String movimientos = "";
+        datoss = guardarMovimientos.pedirPaht();
+        
+        Aceptacion a = new Aceptacion(true,datoss);
 
     }//GEN-LAST:event_AnalisisLexicoActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    
-  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AnalisisLexico;

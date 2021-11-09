@@ -188,5 +188,25 @@ public class ManejoArchivos {
         }
 
     }   
+    
+    public String[] pedirPaht() {
+        String path = "";
+        String nombre="";
+        JFileChooser ventanaSeleccionar = new JFileChooser();
+        String[] dato = new String[2];
+
+        if (ventanaSeleccionar.showDialog(null, "Guardar") == JFileChooser.APPROVE_OPTION) {
+            File archivo;
+            archivo = ventanaSeleccionar.getSelectedFile();
+            nombre= archivo.getName();
+            path = archivo.getAbsolutePath()+".txt";
+            dato[0]=nombre;
+            dato[1]=path;
+            // System.out.println("Archivo creado en " + archivo.getAbsolutePath());
+
+            //System.out.println("Nombre del archivo" + archivo.getName());
+        }
+        return dato;
+    }
 
 }

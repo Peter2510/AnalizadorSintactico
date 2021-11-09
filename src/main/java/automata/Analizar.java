@@ -104,6 +104,7 @@ public class Analizar {
         estados[25][0]=10;   estados[25][1]=10;     estados[25][2]=10;      estados[25][3]=10;  estados[25][4]=10;  estados[25][5]=10;      estados[25][6]=10;      estados[25][7]=10;      estados[25][8]=10;      estados[25][9]=10;      estados[25][11]=10;                              estados[25][13]=10;   estados[25][14]=10;            estados[25][15]=10;    estados[25][16]=10;    estados[25][17]=25;     estados[25][18]=25;     estados[25][19]=10;      estados[25][20]=10;    estados[25][21]=25;      estados[25][22]=25;    estados[25][23]=25;              
         estados[26][0]=10;   estados[26][1]=10;     estados[26][2]=10;      estados[26][3]=10;  estados[26][4]=10;  estados[26][5]=10;      estados[26][6]=10;      estados[26][7]=10;      estados[26][8]=10;      estados[26][9]=10;      estados[26][11]=10;                              estados[26][13]=10;   estados[26][14]=10;            estados[26][15]=10;    estados[26][16]=10;    estados[26][17]=10;     estados[26][18]=26;     estados[26][19]=10;      estados[26][20]=10;    estados[26][21]=10;      estados[26][22]=10;    estados[26][23]=10;              
         estados[27][0]=10;   estados[27][1]=10;     estados[27][2]=10;      estados[27][3]=10;  estados[27][4]=10;  estados[27][5]=10;      estados[27][6]=10;      estados[27][7]=10;      estados[27][8]=10;      estados[27][9]=10;      estados[27][11]=10;                              estados[27][13]=10;   estados[27][14]=10;            estados[27][15]=27;    estados[27][16]=10;    estados[27][17]=27;     estados[27][18]=10;     estados[27][19]=10;      estados[27][20]=10;    estados[27][21]=10;      estados[27][22]=27;    estados[27][23]=27;              
+        
     }
     // se recibe la linea a analizar, el path del archivo de los movimientos, el de los errores, el del archivo del 
     //documento si no hay errores y el del archivo que guarda los tokens si no hay errores.
@@ -120,8 +121,8 @@ public class Analizar {
         
         while(posicion<linea.length()){
             getToken(linea,numeroLinea);
-            System.out.println("eT "+erroresTotales);
-            System.out.println("e "+marcarError);
+         //   System.out.println("eT "+erroresTotales);
+         //   System.out.println("e "+marcarError);
         }
         
         
@@ -143,19 +144,19 @@ public class Analizar {
             if ( (Character.isSpaceChar(linea.charAt(posicion)) && estadoActual!=11)  == true || (linea.charAt(posicion)==tabulacion ) == true) {
                
                 lectura = false;
-               // System.out.println("Estado actual si encontro espacio" + estadoActual);
+                //System.out.println("Estado actual si encontro espacio" + estadoActual);
                 
                 if(estadoActual==17){
                     lectura=true;
                 }else{
-                    System.out.println("sigueinte estado");   
+                   // System.out.println("sigueinte estado");   
                 }
                 
                 
             }
             else{
                 
-                System.out.println("Intento evaluar el signo con espacio");
+                //System.out.println("Intento evaluar el signo con espacio");
                 tmp = tmp + String.valueOf(linea.charAt(posicion));
                 int estadoTemporal = getSiguienteEstado(estadoActual, getIntCaracter(linea.charAt(posicion)));
                
@@ -191,21 +192,21 @@ public class Analizar {
                 
                 //ESCRIBIR
                 if((tmp.length()==8)&&estadoActual==19){
-                    System.out.println("entre a evualar escribir");
-                    System.out.println(tmp.length());
+                    //System.out.println("entre a evualar escribir");
+                    //System.out.println(tmp.length());
                     if(tmp.charAt(0)=='E'&&tmp.charAt(1)=='S'&&tmp.charAt(2)=='C'
                             &&tmp.charAt(3)=='R'&&tmp.charAt(4)=='I'&&tmp.charAt(5)=='B'&&
                             tmp.charAt(6)=='I'&&tmp.charAt(7)=='R'&&tmp.length()==8){
                         estadoActual=19;
-                        System.out.println("ESCROBOR CORRECTO");
-                        System.out.println("-----Termine en el estado ESCRIBIR");
+                        //System.out.println("ESCRIBIR CORRECTO");
+                        //System.out.println("-----Termine en el estado ESCRIBIR");
                     }else{
-                        System.out.println("Estoy en el estado 19 pero con fallas");
-                        System.out.println(tmp);
-                        System.out.println("escribir incorecto");
-                        System.out.println("estou en" + estadoActual);
+                        //System.out.println("Estoy en el estado 19 pero con fallas");
+                        //System.out.println(tmp);
+                        //System.out.println("escribir incorecto");
+                        //System.out.println("estou en" + estadoActual);
                         estadoActual=10;
-                        System.out.println("termien en " + estadoActual);
+                        //System.out.println("termien en " + estadoActual);
                     }
                 }
                 //ENTONCES
@@ -216,8 +217,8 @@ public class Analizar {
                         estadoActual=20;
                         System.out.println("-----Termine en el estado ENTONCES");
                     }else{
-                        System.out.println("Estoy en el estado 20 pero con fallas");
-                        System.out.println(tmp);
+                       // System.out.println("Estoy en el estado 20 pero con fallas");
+                        //System.out.println(tmp);
                         estadoActual=10;
                     }
                 }
@@ -228,8 +229,8 @@ public class Analizar {
                         System.out.println("--Termine en el estado FIN");
                         estadoActual=22;
                     }else{
-                        System.out.println("Estoy en el estado 22 pero con fallas");
-                        System.out.println(tmp);
+                       // System.out.println("Estoy en el estado 22 pero con fallas");
+                        //System.out.println(tmp);
                         estadoActual=10;
                     }
                 }
@@ -240,8 +241,8 @@ public class Analizar {
                         System.out.println("--Termine en el estado FALSO");
                         estadoActual=23;
                     }else{
-                        System.out.println("Estoy en el estado 23 pero con fallas");
-                        System.out.println(tmp);
+                       // System.out.println("Estoy en el estado 23 pero con fallas");
+                       // System.out.println(tmp);
                         estadoActual=10;
                     }
                 }//REPETIR
@@ -250,10 +251,10 @@ public class Analizar {
                             &&tmp.charAt(3)=='E'&&tmp.charAt(4)=='T'&&tmp.charAt(5)=='I'
                             &&tmp.charAt(6)=='R'&&tmp.length()==7){
                         estadoActual=24;
-                        System.out.println("--Termine en el estado REPETIR");
+                       // System.out.println("--Termine en el estado REPETIR");
                     }else{
-                        System.out.println("Estoy en el estado 23 pero con fallas");
-                        System.out.println(tmp);
+                      //  System.out.println("Estoy en el estado 23 pero con fallas");
+                      //  System.out.println(tmp);
                         estadoActual=10;
                     }
                 }//INICIAR
@@ -306,6 +307,7 @@ public class Analizar {
                     estadoActual=10;
                 }
                 
+                
                                 
                 if(estadoActual==5||estadoActual==10){
                     ConError=true;
@@ -314,10 +316,9 @@ public class Analizar {
                     lectura = false;
                     marcarError=1;
                     erroresTotales = erroresTotales + marcarError;
-                    System.out.println("Error en la liena " + (numeroLinea+1) + " en la psocicion " + (posicion+1));
+                    //System.out.println("Error en la liena " + (numeroLinea+1) + " en la psocicion " + (posicion+1));
                     ArrayErrores.add("Error en la linea " + (numeroLinea+1) + " en la posición " + (posicion+1)+" con el lexema: "+ tmp);
-                    System.out.println("sicie" + ArrayErrores.size());
-                    System.out.println("ERROROROROROROROROROR");
+                    
                 } else{
                     
                     guardarMovimientos.AgregarAlArchivo(pathMovimientos + ".txt", "Siguiente lectura");
@@ -350,7 +351,7 @@ public class Analizar {
                     }
          guardarMovimientos.AgregarAlArchivo(pathMovimientos+".txt","\nRECUPERACION DE ERRORES, Se leera: "+ tmplectura);
         } 
-        System.out.println("Linea entera " + tmp);
+        //System.out.println("Linea entera " + tmp);
         
     }
    

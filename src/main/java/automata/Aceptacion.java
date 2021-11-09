@@ -32,13 +32,12 @@ public class Aceptacion {
     private static ArrayList<String> infoPosicionUnicos = new ArrayList<String>();
     private String posicion;
     public static ArrayList<Token> ArrayTokens = new ArrayList<Token>();
-    
-    
+
     public Aceptacion(String lexema, int estado, String pathMovimientos, String posicion) {
 
         this.pathMovimientos = pathMovimientos;
         inicializarMatriz();
-        this.posicion=posicion;
+        this.posicion = posicion;
         guardarTxt(lexema, estado, posicion);
     }
 
@@ -53,15 +52,15 @@ public class Aceptacion {
     public Aceptacion() {
         vaciarListas();
     }
-    
-    public Aceptacion(boolean b){
-        mostrar();
+
+    public Aceptacion(boolean b,String[] patth) {
+        String[] pathh=patth;
+        mostrar(pathh);
     }
-    public Aceptacion(boolean d,int a){
+
+    public Aceptacion(boolean d, int a) {
         System.out.println("mande tabla");
     }
-    
-    
 
     public void inicializarMatriz() {
 
@@ -129,7 +128,7 @@ public class Aceptacion {
 
     // se escriben los pasos que va realizando el automata
     public void guardarTxt(String lexema, int estado, String posicion) {
-        
+
         /* if(estado==4||estado==0 || estado==10){
             guardarMovimientos.AgregarAlArchivo(pathMovimientos + ".txt", "El lexema " + lexema + " es un " + infoAceptacion[estado]);
         }else{
@@ -138,17 +137,32 @@ public class Aceptacion {
             tokensValidos.add(lexema);
             infoTokensValidos.add(infoAceptacion[estado]);
         } */
-        if ((estado > 0 && estado < 29) && !(estado == 5||estado==10||estado==9)) {
+        if ((estado > 0 && estado < 29) && !(estado == 5 || estado == 10 || estado == 9)) {
             guardarMovimientos.AgregarAlArchivo(pathMovimientos + ".txt", "El lexema " + lexema + " es un " + infoAceptacion[estado] + "\n");
             guardarMovimientos.AgregarAlArchivo(pathMovimientos + ".txt", "Siguiente lectura");
 
-            if (estado != 17&&!(estado==18&&lexema.length()==1)) {
-                Token token = new Token(infoAceptacion[estado],posicion,lexema);
+            if (estado != 17 && !(estado == 18 && lexema.length() == 1)) {
+
+                if (estado == 12) {
+                    int c = 1;
+                    String tmp = "";
+                    while (c < lexema.length() - 1) {
+                        String ad = String.valueOf(lexema.charAt(c));
+                        tmp = tmp + ad;
+                        c++;
+                    }
+                    System.out.println(tmp);
+                    lexema = tmp;
+                } else {
+                    System.out.println("normail");
+                }
+                Token token = new Token(infoAceptacion[estado], posicion, lexema);
                 ArrayTokens.add(token);
                 tokensValidos.add(lexema);
                 infoTokensValidos.add(infoAceptacion[estado]);
                 infoPosicion.add(posicion);
                 //System.out.println("Guarde el lexema" + lexema);
+
             } else {
                 //System.out.println("No guarde comentario");
             }
@@ -156,7 +170,7 @@ public class Aceptacion {
         } else {
 
             guardarMovimientos.AgregarAlArchivo(pathMovimientos + ".txt", "El lexema " + lexema + " es un " + infoAceptacion[estado]);
-            
+
             guardarMovimientos.AgregarAlArchivo(pathMovimientos + ".txt", "Siguiente lectura");
         }
 
@@ -218,17 +232,16 @@ public class Aceptacion {
         ArrayTokens.clear();
     }
 
-    public void vaciarArrayTokens(){
+    public void vaciarArrayTokens() {
         ArrayTokens.clear();
     }
-    
-    public void mostrar(){
-        
+
+    public void mostrar(String[] pathSintactico) {
+        String[] pathS = pathSintactico;
         //Sintactico s = new Sintactico(ArrayTokens);
         //Sintact sin = new Sintact(ArrayTokens);
         System.out.println("hoal desde mostrar");
-        AnalizadorSintactico analizador = new AnalizadorSintactico(ArrayTokens);
-        
-        
+        AnalizadorSintactico analizador = new AnalizadorSintactico(ArrayTokens,pathS);
+
     }
 }

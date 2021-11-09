@@ -96,18 +96,20 @@ public class TablaTokens extends javax.swing.JFrame {
         jScrollPane1.setViewportView(Tabla);
         if (Tabla.getColumnModel().getColumnCount() > 0) {
             Tabla.getColumnModel().getColumn(0).setResizable(false);
-            Tabla.getColumnModel().getColumn(0).setPreferredWidth(2);
+            Tabla.getColumnModel().getColumn(0).setPreferredWidth(10);
             Tabla.getColumnModel().getColumn(1).setResizable(false);
-            Tabla.getColumnModel().getColumn(1).setPreferredWidth(250);
+            Tabla.getColumnModel().getColumn(1).setPreferredWidth(375);
             Tabla.getColumnModel().getColumn(2).setResizable(false);
-            Tabla.getColumnModel().getColumn(2).setPreferredWidth(90);
+            Tabla.getColumnModel().getColumn(2).setPreferredWidth(10);
         }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 798, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 850, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
