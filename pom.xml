@@ -10,21 +10,5 @@
         <maven.compiler.source>13</maven.compiler.source>
         <maven.compiler.target>13</maven.compiler.target>
     </properties>
-    
-    <repositories>
-        <repository>
-            <id>com.e-iceblue</id>
-            <name>e-iceblue</name>
-            <url>https://repo.e-iceblue.com/nexus/content/groups/public/</url>
-        </repository>
-    </repositories>
-    
-    <dependencies>
-    <dependency>
-        <groupId> e-iceblue </groupId>
-        <artifactId>spire.pdf</artifactId>
-        <version>3.11.6</version>
-    </dependency>
-    </dependencies>
 
 </project>
