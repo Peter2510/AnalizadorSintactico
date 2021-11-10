@@ -23,10 +23,9 @@ public class AnalizadorSintactico {
     private ArrayList tokens = new ArrayList();
     private Stack pila = new Stack();
     private Token token;
-    private int veces;
     private boolean entroRepetir=false;
-    Repetir rep;
     private String texto="";
+    private int veces;
     private boolean mismoRepetir=false;
     private ArrayList<String> escrbirA = new ArrayList<String>();
     private int cantErrores = 0;
@@ -57,15 +56,6 @@ public class AnalizadorSintactico {
                 archivo.AgregarAlArchivo(path[1], escrbirA.get(cont));
                 cont++;
             }
-         if(contadorRepetir==1){
-             for (int i = 0; i < repeticion.size()/2; i++) {
-                 int c=0;
-                 while(c<repeticion.get(i).getVeces()){
-                     archivo.AgregarAlArchivo(path[1], repeticion.get(i).getTexto());
-                     c++;
-                 }
-             }
-         }
           
         }else{
             System.out.println("ERRORES SINTACTICOS");
@@ -193,29 +183,16 @@ public class AnalizadorSintactico {
     public void Mostrar() {
         if (pila.peek().equals(7) && token.getTipo().equals("entero") || token.getTipo().equals("negativo")
                 || token.getTipo().equals("literal")) {
-            pila.pop();
             
             
             if(entroRepetir==true){
-                if(contador==1){
-                    System.out.println("cambie de texto: " +rep.getTexto()+ " y veces "+ +rep.getVeces());
-                rep.setTexto(token.getToken());
-                rep.setVeces(veces);
-                repeticion.add(rep);
-                System.out.println("a txt " +rep.getTexto()+ " y veces "+ +rep.getVeces());
-                }else{
-                System.out.println("cambie de texto: " +rep.getTexto()+ " y veces "+ +rep.getVeces());
-                rep.setTexto(rep.getTexto()+"\n"+token.getToken());
-                rep.setVeces(veces);
-                repeticion.add(rep);
-                System.out.println("a txt " +rep.getTexto()+ " y veces "+ +rep.getVeces());
-                }
-                
-                
+                texto= texto + token.getToken()+"\n";
             }else{
-            System.out.println("MOSTRAR CON MOSTRAR");
-            escrbirA.add(token.getToken());
+                escrbirA.add(token.getToken());
             }
+            
+            
+            pila.pop();
             get_token();
         } else {
             System.out.println("error no se hallo un terminan entero, negativo o literal");
@@ -246,9 +223,6 @@ public class AnalizadorSintactico {
         pila.push(VECES);
         pila.push("REPETIR");
         entroRepetir=true;
-        rep = new Repetir("",0);
-        System.out.println("EN REPETICIN 9393939393 "+ rep.getTexto()+ " veces"+ rep.getVeces());
-        contadorRepetir=1;
 
         if (pila.peek().equals("REPETIR") && token.getTipo().equals("REPETIR")) {
             System.out.println("REPETIR con REPETIR");
@@ -285,8 +259,14 @@ public class AnalizadorSintactico {
             System.out.println("no hay reduce con CE Y FIN");
         }
         if (pila.peek().equals("FIN") && token.getTipo().equals("FIN")) {
-            Fin();
+            int cot=0;
+            while(cot<veces){
+                escrbirA.add(texto);
+                cot++;
+            }   
             entroRepetir=false;
+            Fin();
+            
         } else {
             System.out.println("nO HAY FIN CON FIN");
         }
