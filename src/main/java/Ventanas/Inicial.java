@@ -386,7 +386,8 @@ public class Inicial extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDeshacerActionPerformed
 
     private void analizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_analizarActionPerformed
-
+        AnalisisLexico.setEnabled(false);
+        tablaTokens.setEnabled(false);
         String txtIngresado = txt.getText();
         salida.setText("");
 
