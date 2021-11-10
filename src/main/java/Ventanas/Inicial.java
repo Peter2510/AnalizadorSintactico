@@ -7,6 +7,7 @@ package Ventanas;
 
 import automata.Aceptacion;
 import automata.Analizar;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -38,6 +39,15 @@ public class Inicial extends javax.swing.JFrame {
         jScrollPane1.setRowHeaderView(numeroLinea);
         this.setVisible(true);
         this.setLocationRelativeTo(null);
+    }
+    
+    public Inicial(ArrayList errores){
+        int c =0;
+        salida.setText("");
+        while(c<errores.size()){
+            salida.append((String) errores.get(c)+"\n");
+            c++;
+        }
     }
 
     /**
