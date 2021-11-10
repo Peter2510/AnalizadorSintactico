@@ -135,8 +135,10 @@ public class ManejoArchivos {
             AgregarAlArchivo(archivo.getAbsolutePath() + ".txt", lectura);
             path = archivo.getAbsolutePath();
             // System.out.println("Archivo creado en " + archivo.getAbsolutePath());
-
+            JOptionPane.showMessageDialog(null, "Se guardo correctamente tu archivo " + archivo.getName());
             //System.out.println("Nombre del archivo" + archivo.getName());
+        }else{
+            JOptionPane.showMessageDialog(null, "Archivo no guardado");
         }
         return path;
     }

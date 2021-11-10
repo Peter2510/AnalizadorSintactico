@@ -211,7 +211,30 @@ public class AnalizadorSintactico {
         String analizado = token.getToken();
 
         if (pila.peek().equals(7) && token.getTipo().equals("entero") || token.getTipo().equals("negativo")
-                || token.getTipo().equals("literal")) {
+                || token.getTipo().equals("literal") || token.getTipo().equals("id")) {
+
+            if (token.getTipo().equals("id")) {
+                System.out.println("ES UN ID");
+                System.out.println("tamaño array" + ids.size());
+                System.out.println("busca" + token.getToken());
+                for (int i = 0; i < ids.size(); i++) {
+                    if (ids.get(i).getNombre().equals(token.getToken())) {
+                        System.out.println("EXISTE EL ID QUE QUIER E AVLUIAR");
+                        if (entroRepetir == true) {
+                            texto = texto + String.valueOf(id.getValor()) + "\n";
+                        } else {
+                            escrbirA.add(String.valueOf(id.getValor()));
+                        }
+
+                    } else {
+                        salidaError(token.getPosicion(), "NUMERO O IDENTIFICADOR CON VALOR", "IDENTIFICADOR SIN VALOR");
+
+                    }
+                }
+
+            } else {
+                System.out.println("no es id");
+            }
 
             if (entroRepetir == true) {
                 texto = texto + token.getToken() + "\n";
@@ -297,6 +320,7 @@ public class AnalizadorSintactico {
         } else {
             System.out.println("no hay reduce con CE Y FIN");
             salidaError(posicion, "FIN", analizado);
+            cantErrores = 1;
         }
         if (pila.peek().equals("FIN") && token.getTipo().equals("FIN")) {
             int cot = 0;
@@ -368,6 +392,7 @@ public class AnalizadorSintactico {
         } else {
             System.out.println("no viene id en asignacion");
             salidaError(token.getPosicion(), "identificador", token.getTipo());
+            cantErrores = 1;
         }
         if (pila.peek().equals("=") && token.getTipo().equals("asignacion")) {
             System.out.println("igual con asignacion");
@@ -377,16 +402,20 @@ public class AnalizadorSintactico {
         } else {
             System.out.println("no viene igual en asignacion");
             salidaError(token.getPosicion(), "SIGNO IGUAL", token.getTipo());
+            cantErrores = 1;
         }
         if (pila.peek().equals(EX) && token.getTipo().equals("negativo") || token.getTipo().equals("entero")) {
             EX();
         } else {
+            cantErrores = 1;
             System.out.println("ERROR EX Y NUMERO");
+
         }
         if (pila.peek().equals(EX) && token.getTipo().equals("FIN")) {
             pila.pop();
         } else {
             System.out.println("EEROR FIN Y EX");
+            cantErrores = 1;
             salidaError(token.getPosicion(), "FIN", token.getTipo());
         }
         if (pila.peek().equals("FIN") && token.getTipo().equals("FIN")) {
@@ -394,6 +423,7 @@ public class AnalizadorSintactico {
 
             System.out.println("evaluando termino de fin en pila " + pila.peek() + " token " + token.getToken());
         } else {
+            cantErrores = 1;
             salidaError(token.getPosicion(), "FIN", token.getTipo());
         }
         if (pila.peek().equals(Y) && token.getTipo().equals("ACEPTADO")) {
@@ -437,6 +467,7 @@ public class AnalizadorSintactico {
             pila.pop();
             System.out.println("SO reduce con FIN");
         } else {
+            cantErrores = 1;
             salidaError(token.getPosicion(), "FIN", token.getTipo());
         }
     }
@@ -451,6 +482,7 @@ public class AnalizadorSintactico {
             pila.pop();
 
         } else {
+            cantErrores = 1;
             salidaError(token.getPosicion(), "NUMERO", token.getTipo());
         }
         if (pila.peek().equals(SIGNO) && token.getTipo().equals("signo de operacion")) {
@@ -469,12 +501,14 @@ public class AnalizadorSintactico {
             OPCION();
 
         } else {
+            cantErrores = 1;
             System.out.println("no vino signo de operador en suma o multi");
             salidaError(token.getPosicion(), "SIGNO DE OPERACION", token.getTipo());
         }
         if (pila.peek().equals(NO) && token.getTipo().equals("FIN")) {
             pila.pop();
         } else {
+            cantErrores = 1;
             System.out.println("no hay reduce con fin y NO");
             salidaError(token.getPosicion(), "FIN", token.getTipo());
         }
@@ -492,19 +526,19 @@ public class AnalizadorSintactico {
 
             id.setValor(resultado);
             ids.add(id);
-            
-            System.out.println("n " + id.getNombre() + " v " + id.getValor());
+            System.out.println("Se creo el objeto con " + ids.get(0).getNombre());
 
             pila.pop();
             get_token();
         } else {
+            cantErrores = 1;
             salidaError(token.getPosicion(), "NUMERO", token.getTipo());
         }
     }
 
     public void salidaError(String posicion, String entradaV, String entradaI) {
         erroresSintacticos.add("Error en la posicion " + posicion + " token esperado: " + entradaV + ", token analizado: " + entradaI);
-        System.out.println("entre aliad eerror");
+        System.out.println("ESCRIBIR ERRROR DESDE SALIDA");
     }
 
     public int getIntToken(String tipo) {
@@ -545,7 +579,6 @@ public class AnalizadorSintactico {
         } else if (tipo.equals("ACEPTADO")) {
             resultado = 18;
         }
-
         System.out.println("retrono estado" + resultado);
         return resultado;
     }

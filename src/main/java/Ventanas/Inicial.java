@@ -329,7 +329,9 @@ public class Inicial extends javax.swing.JFrame {
     }//GEN-LAST:event_itemCambiosActionPerformed
 
     private void txtFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFileActionPerformed
-        // TODO add your handling code here:
+       ManejoArchivos manejo = new ManejoArchivos();
+        String lectura = txt.getText();
+        manejo.guardarArchivo(lectura);
     }//GEN-LAST:event_txtFileActionPerformed
 
     private void pdfFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pdfFileActionPerformed
@@ -400,14 +402,14 @@ public class Inicial extends javax.swing.JFrame {
             //la opcion de generar la copia del texto que se analizo y no tiene erores
             if (contadorFinalErrores == 0) {
 
-                JOptionPane.showMessageDialog(null, "Selecciona la ubicacion y nombre del archivo que contiene el reporte");
-                ManejoArchivos ArchivoReporte = new ManejoArchivos();
-                String Reporte = "Tipo token \t\t\tLexema\t\t\tPosicion(columna,linea)";
-                String path = ArchivoReporte.guardarArchivo(Reporte);
-                Aceptacion recuentoTotal = new Aceptacion(path);
-                JOptionPane.showMessageDialog(null, "No se encontraron errores, se habilito la opcion del recuento de tokens");
+               // JOptionPane.showMessageDialog(null, "Selecciona la ubicacion y nombre del archivo que contiene el reporte");
+             //   ManejoArchivos ArchivoReporte = new ManejoArchivos();
+             //   String Reporte = "Tipo token \t\t\tLexema\t\t\tPosicion(columna,linea)";
+             //   String path = ArchivoReporte.guardarArchivo(Reporte);
+             //   Aceptacion recuentoTotal = new Aceptacion(path);
+             //   JOptionPane.showMessageDialog(null, "No se encontraron errores, se habilito la opcion del recuento de tokens");
                 GuardarTextoSinErrores.setVisible(true);
-                recuento.setVisible(true);
+            //    recuento.setVisible(true);
                 salida.setText("No se encontraron errores lexicos");
                 JOptionPane.showMessageDialog(null, "No se encontraron errores léxicos");
                 AnalisisLexico.setEnabled(true);
