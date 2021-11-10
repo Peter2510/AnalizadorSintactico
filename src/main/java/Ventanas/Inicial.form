@@ -56,18 +56,21 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtFileActionPerformed"/>
                   </Events>
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="pdfFile">
+                <MenuItem class="javax.swing.JMenuItem" name="java">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Documento PDF"/>
+                    <Property name="text" type="java.lang.String" value="Archivo java"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pdfFileActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="javaActionPerformed"/>
                   </Events>
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="WordFile">
+                <MenuItem class="javax.swing.JMenuItem" name="html">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Documento Word"/>
+                    <Property name="text" type="java.lang.String" value="Archivo html"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="htmlActionPerformed"/>
+                  </Events>
                 </MenuItem>
               </SubComponents>
             </Menu>

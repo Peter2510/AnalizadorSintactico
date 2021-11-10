@@ -210,5 +210,25 @@ public class ManejoArchivos {
         }
         return dato;
     }
+    
+     public String guardarArchivoFile(String lectura, String ext) {
+        String path = "";
+        JFileChooser ventanaSeleccionar = new JFileChooser();
+
+        if (ventanaSeleccionar.showDialog(null, "Guardar") == JFileChooser.APPROVE_OPTION) {
+            File archivo;
+            archivo = ventanaSeleccionar.getSelectedFile();
+
+            crearArchivo(archivo.getAbsolutePath() + ext);
+            AgregarAlArchivo(archivo.getAbsolutePath() + ext, lectura);
+            path = archivo.getAbsolutePath();
+            // System.out.println("Archivo creado en " + archivo.getAbsolutePath());
+            JOptionPane.showMessageDialog(null, "Se guardo correctamente tu archivo " + archivo.getName());
+            //System.out.println("Nombre del archivo" + archivo.getName());
+        }else{
+            JOptionPane.showMessageDialog(null, "Archivo no guardado");
+        }
+        return path;
+    }
 
 }

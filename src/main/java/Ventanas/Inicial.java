@@ -80,8 +80,8 @@ public class Inicial extends javax.swing.JFrame {
         itemCambios = new javax.swing.JMenuItem();
         menuGuardarComo = new javax.swing.JMenu();
         txtFile = new javax.swing.JMenuItem();
-        pdfFile = new javax.swing.JMenuItem();
-        WordFile = new javax.swing.JMenuItem();
+        java = new javax.swing.JMenuItem();
+        html = new javax.swing.JMenuItem();
         menuLimpiar = new javax.swing.JMenu();
         recuento = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -249,16 +249,21 @@ public class Inicial extends javax.swing.JFrame {
         });
         menuGuardarComo.add(txtFile);
 
-        pdfFile.setText("Documento PDF");
-        pdfFile.addActionListener(new java.awt.event.ActionListener() {
+        java.setText("Archivo java");
+        java.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pdfFileActionPerformed(evt);
+                javaActionPerformed(evt);
             }
         });
-        menuGuardarComo.add(pdfFile);
+        menuGuardarComo.add(java);
 
-        WordFile.setText("Documento Word");
-        menuGuardarComo.add(WordFile);
+        html.setText("Archivo html");
+        html.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                htmlActionPerformed(evt);
+            }
+        });
+        menuGuardarComo.add(html);
 
         Guardar.add(menuGuardarComo);
 
@@ -334,9 +339,11 @@ public class Inicial extends javax.swing.JFrame {
         manejo.guardarArchivo(lectura);
     }//GEN-LAST:event_txtFileActionPerformed
 
-    private void pdfFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pdfFileActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_pdfFileActionPerformed
+    private void javaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_javaActionPerformed
+       ManejoArchivos manejo = new ManejoArchivos();
+        String lectura = txt.getText();
+        manejo.guardarArchivoFile(lectura,".java"); 
+    }//GEN-LAST:event_javaActionPerformed
 
     private void CargarArchivoItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CargarArchivoItemActionPerformed
         // se muestra la opcion para cargar el archivo de texto
@@ -345,7 +352,15 @@ public class Inicial extends javax.swing.JFrame {
     }//GEN-LAST:event_CargarArchivoItemActionPerformed
 
     private void nuevoArchivoItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoArchivoItemActionPerformed
-
+        String lectura = txt.getText();
+        if(lectura.length()>0){
+            JOptionPane.showMessageDialog(null,"Se guardaran los cambios realizados al documento");
+            ManejoArchivos a = new ManejoArchivos();
+            a.guardarArchivo(lectura);
+        }else{
+            txt.setText("");
+        }
+        
     }//GEN-LAST:event_nuevoArchivoItemActionPerformed
 
     private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
@@ -465,6 +480,12 @@ public class Inicial extends javax.swing.JFrame {
 
     }//GEN-LAST:event_AnalisisLexicoActionPerformed
 
+    private void htmlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_htmlActionPerformed
+         ManejoArchivos manejo = new ManejoArchivos();
+        String lectura = txt.getText();
+        manejo.guardarArchivoFile(lectura,".html"); 
+    }//GEN-LAST:event_htmlActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -475,10 +496,10 @@ public class Inicial extends javax.swing.JFrame {
     private javax.swing.JMenu Guardar;
     private javax.swing.JButton GuardarTextoSinErrores;
     private javax.swing.JMenu NuevoArchivoItem;
-    private javax.swing.JMenuItem WordFile;
     private javax.swing.JButton analizar;
     private javax.swing.JButton btnDeshacer;
     private javax.swing.JButton btnRehacer;
+    private javax.swing.JMenuItem html;
     private javax.swing.JMenuItem itemCambios;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -487,10 +508,10 @@ public class Inicial extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JMenuItem java;
     private javax.swing.JMenu menuGuardarComo;
     private javax.swing.JMenu menuLimpiar;
     private javax.swing.JMenuItem nuevoArchivoItem;
-    private javax.swing.JMenuItem pdfFile;
     private javax.swing.JMenu recuento;
     public static javax.swing.JTextArea salida;
     private javax.swing.JButton tablaTokens;
