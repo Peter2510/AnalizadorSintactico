@@ -8,10 +8,13 @@ package Ventanas;
 import automata.Aceptacion;
 import automata.Analizar;
 import java.util.ArrayList;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.event.CaretListener;
+import javax.swing.undo.UndoManager;
 import manejoarchivos.ManejoArchivos;
 import patrones.Patrones;
 
@@ -27,10 +30,14 @@ public class Inicial extends javax.swing.JFrame {
     private NumeroLinea numeroLinea;
     private int contadorError = 0;
     private int contadorFinalErrores = 0;
+    private String inicial="";
+    private String intermedio="";
+    private String finals="";
 
     public Inicial() {
         initComponents();
         this.setTitle("PROYECTO FINAL");
+        
         GuardarTextoSinErrores.setVisible(false);
         recuento.setVisible(false);
         tablaTokens.setEnabled(false);
@@ -88,6 +95,8 @@ public class Inicial extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(102, 102, 102));
+
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setText("ANALIZADOR LÉXICO Y SINTÁCTICO");
 
@@ -96,6 +105,11 @@ public class Inicial extends javax.swing.JFrame {
         txt.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
                 txtCaretUpdate(evt);
+            }
+        });
+        txt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtKeyReleased(evt);
             }
         });
         jScrollPane1.setViewportView(txt);
@@ -159,7 +173,7 @@ public class Inicial extends javax.swing.JFrame {
                                 .addComponent(btnDeshacer)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnRehacer)
-                                .addGap(242, 242, 242)
+                                .addGap(193, 193, 193)
                                 .addComponent(jLabel1))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(411, 411, 411)
@@ -485,6 +499,10 @@ public class Inicial extends javax.swing.JFrame {
         String lectura = txt.getText();
         manejo.guardarArchivoFile(lectura,".html"); 
     }//GEN-LAST:event_htmlActionPerformed
+
+    private void txtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtKeyReleased
+        
+    }//GEN-LAST:event_txtKeyReleased
 
     /**
      * @param args the command line arguments
